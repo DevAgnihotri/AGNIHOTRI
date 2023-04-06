@@ -1,0 +1,236 @@
+<div style="max-width: 960px;border: 1px solid&nbsp;#ccc;margin: 1em auto;padding: 1.5em 1.5em 1.5em 7em;background-color: white;box-shadow: 0 0 10px #ccc"><div style="padding-bottom: .5em;"><div><h3 id="sorry-for-unreliable-dataset-and-confusing-columns">Sorry for unreliable dataset and confusing columns</h3>
+</div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [1]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd</code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [2]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">df <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'Ecommerce Purchases'</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [3]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">df<span class="token punctuation">.</span>columns</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [3]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">Index(['6534.10.5"', 'Mckinney-Gonzalez', '869957209729483', '02/25', '160',
+       'Mastercard', 'david75@miller.biz', 'Production assistant, television',
+       '211.51.146.20', 'de', '80.53'],
+      dtype='object')</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div><h3 id="1-display-top-10-rows-of-the-dataset">1.Display Top 10 Rows of The Dataset</h3>
+</div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [4]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">df<span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [4]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>6534.10.5"</th>
+      <th>Mckinney-Gonzalez</th>
+      <th>869957209729483</th>
+      <th>02/25</th>
+      <th>160</th>
+      <th>Mastercard</th>
+      <th>david75@miller.biz</th>
+      <th>Production assistant, television</th>
+      <th>211.51.146.20</th>
+      <th>de</th>
+      <th>80.53</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>PSC 3524, Box 9417\nAPO AA 09217-2597</th>
+      <th>77 oq</th>
+      <th>PM</th>
+      <td>Mozilla/5.0 (X11; Linux x86_64; rv:1.9.5.20) G...</td>
+      <td>Rodriguez Ltd</td>
+      <td>210029157389946</td>
+      <td>07/22</td>
+      <td>956</td>
+      <td>Voyager</td>
+      <td>amber18@gmail.com</td>
+      <td>Therapist, art</td>
+      <td>240.0.241.47</td>
+      <td>es</td>
+      <td>4.81</td>
+    </tr>
+    <tr>
+      <th>Unit 2512 Box 3240\nDPO AE 73264-2823</th>
+      <th>34 bB</th>
+      <th>AM</th>
+      <td>Opera/9.33.(X11; Linux x86_64; en-US) Presto/2...</td>
+      <td>Schneider and Sons</td>
+      <td>210023579873538</td>
+      <td>12/21</td>
+      <td>336</td>
+      <td>VISA 13 digit</td>
+      <td>pjuarez@fisher-burns.net</td>
+      <td>Fine artist</td>
+      <td>122.180.112.221</td>
+      <td>el</td>
+      <td>55.30</td>
+    </tr>
+    <tr>
+      <th>Unit 2807 Box 1152\nDPO AE 90364-7161</th>
+      <th>69 GO</th>
+      <th>AM</th>
+      <td>Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6...</td>
+      <td>Price Ltd</td>
+      <td>3337549391700444</td>
+      <td>09/21</td>
+      <td>979</td>
+      <td>VISA 16 digit</td>
+      <td>johnsonmaria@jackson-hernandez.biz</td>
+      <td>Learning mentor</td>
+      <td>67.28.45.167</td>
+      <td>el</td>
+      <td>89.63</td>
+    </tr>
+    <tr>
+      <th>524 Hill Track Apt. 980\nSandrahaven, GA 68830-0916</th>
+      <th>52 ss</th>
+      <th>AM</th>
+      <td>Mozilla/5.0 (Windows; U; Windows NT 5.2) Apple...</td>
+      <td>Irwin-Frost</td>
+      <td>6011932554425502</td>
+      <td>03/26</td>
+      <td>832</td>
+      <td>Diners Club / Carte Blanche</td>
+      <td>hoffmanperry@yahoo.com</td>
+      <td>Seismic interpreter</td>
+      <td>230.103.41.76</td>
+      <td>de</td>
+      <td>48.62</td>
+    </tr>
+    <tr>
+      <th>461 William Route Apt. 914\nCoxport, MD 74117</th>
+      <th>27 EA</th>
+      <th>AM</th>
+      <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_5_7)...</td>
+      <td>Smith Inc</td>
+      <td>4206301309941629</td>
+      <td>09/16</td>
+      <td>136</td>
+      <td>Maestro</td>
+      <td>stevemyers@hotmail.com</td>
+      <td>Engineer, civil (contracting)</td>
+      <td>248.147.6.166</td>
+      <td>ru</td>
+      <td>61.83</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div><h3 id="2-check-last-3-rows-of-the-dataset">2. Check Last 3 Rows of The Dataset</h3>
+</div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [5]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">df<span class="token punctuation">.</span>tail<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [5]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>6534.10.5"</th>
+      <th>Mckinney-Gonzalez</th>
+      <th>869957209729483</th>
+      <th>02/25</th>
+      <th>160</th>
+      <th>Mastercard</th>
+      <th>david75@miller.biz</th>
+      <th>Production assistant, television</th>
+      <th>211.51.146.20</th>
+      <th>de</th>
+      <th>80.53</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Unit 4434 Box 6343\nDPO AE 28026-0283</th>
+      <th>74 Zh</th>
+      <th>AM</th>
+      <td>Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_7...</td>
+      <td>Anderson Ltd</td>
+      <td>6011539787356311</td>
+      <td>05/21</td>
+      <td>1</td>
+      <td>VISA 16 digit</td>
+      <td>tyler16@gmail.com</td>
+      <td>Veterinary surgeon</td>
+      <td>156.210.0.254</td>
+      <td>el</td>
+      <td>83.98</td>
+    </tr>
+    <tr>
+      <th>0096 English Rest\nRoystad, IA 12457</th>
+      <th>74 cL</th>
+      <th>PM</th>
+      <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_8;...</td>
+      <td>Cook Inc</td>
+      <td>180003348082930</td>
+      <td>11/17</td>
+      <td>987</td>
+      <td>American Express</td>
+      <td>elizabethmoore@reid.net</td>
+      <td>Local government officer</td>
+      <td>55.78.26.143</td>
+      <td>es</td>
+      <td>38.84</td>
+    </tr>
+    <tr>
+      <th>40674 Barrett Stravenue\nGrimesville, WI 79682</th>
+      <th>64 Hr</th>
+      <th>AM</th>
+      <td>Mozilla/5.0 (X11; Linux i686; rv:1.9.5.20) Gec...</td>
+      <td>Greene Inc</td>
+      <td>4139972901927273</td>
+      <td>02/19</td>
+      <td>302</td>
+      <td>JCB 15 digit</td>
+      <td>rachelford@vaughn.com</td>
+      <td>Embryologist, clinical</td>
+      <td>176.119.198.199</td>
+      <td>el</td>
+      <td>67.59</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div><h3 id="3-check-datatype-of-each-column">3. Check Datatype of Each Column</h3>
+</div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [6]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">df<span class="token punctuation">.</span>dtypes</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [6]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">6534.10.5"                           object
+Mckinney-Gonzalez                    object
+869957209729483                       int64
+02/25                                object
+160                                   int64
+Mastercard                           object
+david75@miller.biz                   object
+Production assistant, television     object
+211.51.146.20                        object
+de                                   object
+80.53                               float64
+dtype: object</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div><h3 id="4-check-null-values-in-the-dataset">4.Check Null Values In The Dataset</h3>
+</div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [8]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">df<span class="token punctuation">.</span>isnull<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [8]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">6534.10.5"                          0
+Mckinney-Gonzalez                   0
+869957209729483                     0
+02/25                               0
+160                                 0
+Mastercard                          0
+david75@miller.biz                  0
+Production assistant, television    0
+211.51.146.20                       0
+de                                  0
+80.53                               0
+dtype: int64</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div><h3 id="6-how-many-rows-and-columns-are-there-in-our-dataset-">6. How Many Rows And Columns Are There In Our Dataset?</h3>
+</div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [9]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">df<span class="token punctuation">.</span>shape</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [9]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">(2363, 11)</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div><h3 id="7-highest-and-lowest-purchase-prices">7. Highest And Lowest Purchase Prices</h3>
+</div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [11]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">df<span class="token punctuation">[</span><span class="token string">'160'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>max<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [11]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">9989</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [10]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">df<span class="token punctuation">[</span><span class="token string">'160'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>idxmax<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [10]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">('88305 Eileen Prairie\nLake Michellechester, NC 56239', '90 KU', 'PM')</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [12]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">df<span class="token punctuation">[</span><span class="token string">'160'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>idxmin<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [12]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">('PSC 6610, Box 2871\nAPO AE 39171-6454', '80 Kd', 'AM')</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [13]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">df<span class="token punctuation">[</span><span class="token string">'160'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>min<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [13]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">0</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div><h3 id="8-average-purchase-price">8. Average Purchase Price</h3>
+</div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [15]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">df<span class="token punctuation">[</span><span class="token string">'160'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [15]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">942.6517139229793</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div><h3 id="9-how-many-people-have-french-fr-as-their-language-">9 .How many people have French 'fr' as their Language ?</h3>
+</div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [17]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token punctuation">(</span>df<span class="token punctuation">[</span><span class="token string">'de'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'fr'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [17]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">224</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div><h3 id="11-how-many-people-have-mastercard-as-their-credit-card-provider-and-made-a-purchase-above-50-">11. How Many People Have Mastercard As Their Credit Card Provider And Made A Purchase Above 50?</h3>
+</div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [20]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">len<span class="token punctuation">(</span>df<span class="token punctuation">[</span><span class="token punctuation">(</span>df<span class="token punctuation">[</span><span class="token string">'Mastercard'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'Mastercard'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span>df<span class="token punctuation">[</span><span class="token string">'160'</span><span class="token punctuation">]</span> <span class="token operator">&gt;</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [20]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">173</pre></div></div></div></div></div></div>

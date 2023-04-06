@@ -1,0 +1,830 @@
+<div style="max-width: 960px;border: 1px solid&nbsp;#ccc;margin: 1em auto;padding: 1.5em 1.5em 1.5em 7em;background-color: white;box-shadow: 0 0 10px #ccc"><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#loading the required libraries</span>
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">from</span> matplotlib <span class="token keyword">import</span> pyplot <span class="token keyword">as</span> plt
+<span class="token comment" spellcheck="true">#import seaborn as sns</span></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#loading the ipl dataset</span>
+ipl<span class="token operator">=</span>pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'ipl_2023_dataset.csv'</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#having a glance at records of the dataset</span>
+ipl</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [3]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Player Name</th>
+      <th>Type</th>
+      <th>Price Cr</th>
+      <th>Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>Ben Stokes</td>
+      <td>All-Rounder</td>
+      <td>16.25</td>
+      <td>Chennai Super Kings</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>Ravindra Jadeja</td>
+      <td>All-Rounder</td>
+      <td>16.00</td>
+      <td>Chennai Super Kings</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>Deepak Chahar</td>
+      <td>Bowler</td>
+      <td>14.00</td>
+      <td>Chennai Super Kings</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>MS Dhoni</td>
+      <td>Wicket-Keeper</td>
+      <td>12.00</td>
+      <td>Chennai Super Kings</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>Moeen Ali</td>
+      <td>All-Rounder</td>
+      <td>8.00</td>
+      <td>Chennai Super Kings</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>563</th>
+      <td>563</td>
+      <td>Dhruv Patel</td>
+      <td>All-Rounder</td>
+      <td>NaN</td>
+      <td>Unsold</td>
+    </tr>
+    <tr>
+      <th>564</th>
+      <td>564</td>
+      <td>Jack Prestwidge</td>
+      <td>All-Rounder</td>
+      <td>NaN</td>
+      <td>Unsold</td>
+    </tr>
+    <tr>
+      <th>565</th>
+      <td>565</td>
+      <td>Aditya Sarvate</td>
+      <td>All-Rounder</td>
+      <td>NaN</td>
+      <td>Unsold</td>
+    </tr>
+    <tr>
+      <th>566</th>
+      <td>566</td>
+      <td>Sagar Solanki</td>
+      <td>All-Rounder</td>
+      <td>NaN</td>
+      <td>Unsold</td>
+    </tr>
+    <tr>
+      <th>567</th>
+      <td>567</td>
+      <td>Prenelan Subrayen</td>
+      <td>All-Rounder</td>
+      <td>NaN</td>
+      <td>Unsold</td>
+    </tr>
+  </tbody>
+</table>
+<p>568 rows × 5 columns</p>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Looking at the number of rows(no. of palyers) and columns in dataset</span>
+ipl<span class="token punctuation">.</span>shape</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [4]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">(568, 5)</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Getting the frequency of players in a team</span>
+ipl<span class="token punctuation">[</span><span class="token string">'Team'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value_counts<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [5]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">Unsold                         325
+Chennai Super Kings             25
+Delhi Capitals                  25
+Gujarat Titans                  25
+Lucknow Super Giants            25
+Royal Challengers Bangalore     25
+Rajasthan Royals                25
+Sunrisers Hyderabad             25
+Mumbai Indians                  24
+Kolkata Knight Riders           22
+Punjab Kings                    22
+Name: Team, dtype: int64</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Extracting the records where a team has a player equal to or with a higher value than 10 Cr.</span>
+ipl<span class="token punctuation">[</span>ipl<span class="token punctuation">[</span><span class="token string">'Price Cr'</span><span class="token punctuation">]</span><span class="token operator">&gt;=</span><span class="token number">10</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [6]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Player Name</th>
+      <th>Type</th>
+      <th>Price Cr</th>
+      <th>Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>Ben Stokes</td>
+      <td>All-Rounder</td>
+      <td>16.25</td>
+      <td>Chennai Super Kings</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>Ravindra Jadeja</td>
+      <td>All-Rounder</td>
+      <td>16.00</td>
+      <td>Chennai Super Kings</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>Deepak Chahar</td>
+      <td>Bowler</td>
+      <td>14.00</td>
+      <td>Chennai Super Kings</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>MS Dhoni</td>
+      <td>Wicket-Keeper</td>
+      <td>12.00</td>
+      <td>Chennai Super Kings</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>25</td>
+      <td>Rishabh Pant</td>
+      <td>Wicket-Keeper</td>
+      <td>16.00</td>
+      <td>Delhi Capitals</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>26</td>
+      <td>Axar Patel</td>
+      <td>All-Rounder</td>
+      <td>12.00</td>
+      <td>Delhi Capitals</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>50</td>
+      <td>Hardik Pandya</td>
+      <td>All-Rounder</td>
+      <td>15.00</td>
+      <td>Gujarat Titans</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>51</td>
+      <td>Rashid Khan</td>
+      <td>Bowler</td>
+      <td>15.00</td>
+      <td>Gujarat Titans</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>75</td>
+      <td>Andre Russell</td>
+      <td>All-Rounder</td>
+      <td>16.00</td>
+      <td>Kolkata Knight Riders</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>76</td>
+      <td>Shreyas Iyer</td>
+      <td>Batter</td>
+      <td>12.25</td>
+      <td>Kolkata Knight Riders</td>
+    </tr>
+    <tr>
+      <th>77</th>
+      <td>77</td>
+      <td>Varun Chakaravarthy</td>
+      <td>Bowler</td>
+      <td>12.00</td>
+      <td>Kolkata Knight Riders</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>78</td>
+      <td>Shardul Thakur</td>
+      <td>Bowler</td>
+      <td>10.75</td>
+      <td>Kolkata Knight Riders</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>79</td>
+      <td>Lockie Ferguson</td>
+      <td>Bowler</td>
+      <td>10.00</td>
+      <td>Kolkata Knight Riders</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>97</td>
+      <td>KL Rahul</td>
+      <td>Batter</td>
+      <td>17.00</td>
+      <td>Lucknow Super Giants</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>98</td>
+      <td>Nicholas Pooran</td>
+      <td>Wicket-Keeper</td>
+      <td>16.00</td>
+      <td>Lucknow Super Giants</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>99</td>
+      <td>Avesh Khan</td>
+      <td>Bowler</td>
+      <td>10.00</td>
+      <td>Lucknow Super Giants</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>100</td>
+      <td>Marcus Stoinis</td>
+      <td>All-Rounder</td>
+      <td>10.00</td>
+      <td>Lucknow Super Giants</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>122</td>
+      <td>Cameron Green</td>
+      <td>All-Rounder</td>
+      <td>17.50</td>
+      <td>Mumbai Indians</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>123</td>
+      <td>Rohit Sharma</td>
+      <td>Batter</td>
+      <td>16.00</td>
+      <td>Mumbai Indians</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>124</td>
+      <td>Ishan Kishan</td>
+      <td>Wicket-Keeper</td>
+      <td>15.25</td>
+      <td>Mumbai Indians</td>
+    </tr>
+    <tr>
+      <th>125</th>
+      <td>125</td>
+      <td>Jasprit Bumrah</td>
+      <td>Bowler</td>
+      <td>12.00</td>
+      <td>Mumbai Indians</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>146</td>
+      <td>Sam Curran</td>
+      <td>All-Rounder</td>
+      <td>18.50</td>
+      <td>Punjab Kings</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>147</td>
+      <td>Liam Livingstone</td>
+      <td>All-Rounder</td>
+      <td>11.50</td>
+      <td>Punjab Kings</td>
+    </tr>
+    <tr>
+      <th>168</th>
+      <td>168</td>
+      <td>Virat Kohli</td>
+      <td>Batter</td>
+      <td>15.00</td>
+      <td>Royal Challengers Bangalore</td>
+    </tr>
+    <tr>
+      <th>169</th>
+      <td>169</td>
+      <td>Glenn Maxwell</td>
+      <td>All-Rounder</td>
+      <td>11.00</td>
+      <td>Royal Challengers Bangalore</td>
+    </tr>
+    <tr>
+      <th>170</th>
+      <td>170</td>
+      <td>Harshal Patel</td>
+      <td>Bowler</td>
+      <td>10.75</td>
+      <td>Royal Challengers Bangalore</td>
+    </tr>
+    <tr>
+      <th>171</th>
+      <td>171</td>
+      <td>Wanindu Hasaranga</td>
+      <td>All-Rounder</td>
+      <td>10.75</td>
+      <td>Royal Challengers Bangalore</td>
+    </tr>
+    <tr>
+      <th>193</th>
+      <td>193</td>
+      <td>Sanju Samson</td>
+      <td>Wicket-Keeper</td>
+      <td>14.00</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>194</th>
+      <td>194</td>
+      <td>Prasidh Krishna</td>
+      <td>Bowler</td>
+      <td>10.00</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>195</td>
+      <td>Jos Buttler</td>
+      <td>Wicket-Keeper</td>
+      <td>10.00</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>218</th>
+      <td>218</td>
+      <td>Harry Brook</td>
+      <td>Batter</td>
+      <td>13.25</td>
+      <td>Sunrisers Hyderabad</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#ipl team, with their market values in descending order</span>
+ipl<span class="token punctuation">.</span>groupby<span class="token punctuation">(</span><span class="token string">'Team'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'Price Cr'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sort_values<span class="token punctuation">(</span>ascending<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [7]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">Team
+Mumbai Indians                 94.95
+Chennai Super Kings            93.50
+Kolkata Knight Riders          93.35
+Royal Challengers Bangalore    93.25
+Rajasthan Royals               91.65
+Lucknow Super Giants           91.45
+Delhi Capitals                 90.55
+Gujarat Titans                 90.55
+Sunrisers Hyderabad            88.45
+Punjab Kings                   82.80
+Unsold                          0.00
+Name: Price Cr, dtype: float64</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">plt<span class="token punctuation">.</span>bar<span class="token punctuation">(</span>list<span class="token punctuation">(</span>ipl<span class="token punctuation">[</span><span class="token string">'Price Cr'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>list<span class="token punctuation">(</span>ipl<span class="token punctuation">[</span><span class="token string">'Price Cr'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>color<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"blue"</span><span class="token punctuation">,</span><span class="token string">"yellow"</span><span class="token punctuation">,</span><span class="token string">"purple"</span><span class="token punctuation">,</span><span class="token string">"red"</span><span class="token punctuation">,</span><span class="token string">"pink"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'MI'</span><span class="token punctuation">,</span> <span class="token string">'CSK'</span><span class="token punctuation">,</span> <span class="token string">'KKR'</span><span class="token punctuation">,</span><span class="token string">'PK'</span><span class="token punctuation">,</span><span class="token string">'RR'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Teams'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'Prices'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><div style="min-height: 1em;"><img src="data:image/png;base64,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Ow8FAADQUE2KGbfbrSNHjpy3vqSkRJGRkd95KAAAgIZqUsxMnDhRc+bMqfVpvyUlJZo3b54mTJgQsuEAAAAupkkxs3TpUkVGRioxMVEJCQlKSEhQr169FBsbqyeffDLUMwIAANSrSW/NdrvdKioq0ltvvaW9e/cqIiJC/fr106hRo0I9HwAAwAU1+XNmLMvSmDFjNGbMmFDOAwAA0CgNjpkVK1borrvuUnh4uFasWHHBfWfPnv2dBwMAAGiIBsfMsmXLlJ6ervDwcC1btqze/SzLClnMVFdXKysrS88//7zKysrk8Xh0xx136OGHH+a3cwMAAEmNiJmjR4/W+d/N6fHHH9eqVav03HPPqU+fPtq9e7emT58ut9vN2R8AACCpCdfMnD17VomJidq8ebN69erVHDMFFRUVaeLEiUpNTZUkde/eXS+++KLef//9eu/j9/vl9/uDt30+X7POCAAA7NXomGnXrp1Onz7dHLOc5z/+4z/07LPP6uDBg+rZs6f27t2rP//5z3rqqafqvU92drYWL17cIvMBAFqp7bvtnsAc1w+2e4Kmfc5MRkaGHn/8cVVVVYV6nloeeOAB3XrrrUpMTFS7du00cOBAzZkzR+np6fXeJzMzU+Xl5cGltLS0WWcEAAD2atJbsz/44ANt27ZNb775pvr27XverzB45ZVXQjLcSy+9pBdeeEHr169Xnz59VFxcrDlz5sjj8WjatGl13sflcsnlcoXk6wMAAOdrUsx06tRJkydPDvUs57nvvvuCZ2ckqW/fvjp27Jiys7PrjRkAAHBpaVTM1NTU6IknntDBgwd15swZ3XDDDcrKylJERESzDPf111+rTZvar4S1bdtWNTU1zfL1AACAeRp1zcwjjzyiBx98UB07dtQPfvADrVixQhkZGc01m9LS0vTII4/o9ddf1yeffKL8/Hw99dRTuvHGG5vtawIAALM06szM73//ez399NP65S9/KUn605/+pNTUVK1du/a8Myih8N///d9asGCBZs6cqZMnT8rj8eiXv/ylFi5cGPKvBQAAzNSomDl+/LjGjx8fvJ2cnCzLsnTixAl17do15MNFRUVp+fLlWr58ecgfGwAAtA6NOp1SVVWl8PDwWuvatWuns2fPhnQoAACAhmrUmZlAIKA77rij1lufT58+rbvvvrvW27ND9dZsAACAi2lUzNT1dujb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9pmOHDmiZcuW6ZlnntGiRYtacvRW4dxxPHTokObNm6esrCw98cQT5+13+PBhjRw5Ut26ddPWrVsb/MmtOF9Dnru5ubn67LPPtHv3bo0YMUI33XST9u3bZ9PE9iNmDHfttdfK6/XqlVdeCa575ZVXFB8fr4EDB9o4mflmzpwpy7L0/vvva/LkyerZs6f69OmjuXPnateuXfrLX/6i8vJyrV27VgMHDlRCQoKSkpK0bNkyJSQknPd4paWl+uEPfyi32623335bsbGxNnxXZlm6dKlmzZqlDRs21PlBmRfa7nK5FBcXJ6/Xq0mTJik5OVlvvfVWS43eapw7jt26ddOvfvUrJScn67XXXqu1z9/+9jeNHDlSw4cP16ZNmxQREWHTtK1DQ567nTp1UlxcnHr27KklS5aoqqpK77zzjk0T24+YaQXuvPNO5ebmBm+vW7eOT0j+jv71r3+poKBAGRkZioyMPG/7uX9IqqqqlJ+ff9FfUX/gwAGNGDFCvXv31htvvKGOHTs21+itxvz587VkyRJt3rxZN954Y6O3f9tHH32koqIitW/fvrnGvWRERETozJkzwdtFRUW6/vrrNXnyZD3//PMKC3P8Z7Ea5WLP3aqqKv3P//yPJF3Sz2+eda3AbbfdpszMTB07dkyS9Je//EUbNmxQYWGhvYMZrKSkRIFAQImJifXuc9111+nBBx/Uz3/+c919990aOnSobrjhBt1+++3nfUL17bffrhEjRuh///d/1bZt2+Ye33hbtmzRq6++qm3btumGG25o9HZJ2rx5szp27Kiqqir5/X61adNGK1eubO7RW61AIKBt27Zp69atmjVrVnD9jTfeqClTpnBsQ6ghz92f/exnatu2rb755hvV1NSoe/fuuuWWW2ya2H6cmWkFvv/97ys1NVV5eXnKzc1VamqqLrvsMrvHMlpDPxj7kUceUVlZmVavXq0+ffpo9erVSkxMPO+16wkTJujdd9+t9XIg6tevXz91795dixYtUkVFRaO3S1JSUpKKi4v13nvvadq0aZo+fbomT57c3KO3Oud+sIaHhyslJUVTpkxRVlZWcPvEiROVn5+vd999174hW5mGPHeXLVum4uJibdmyRb1799batWsVExNj08T2I2ZaiTvvvFN5eXl67rnndOedd9o9jvGuuuoqWZalv//97xfdNzY2VjfffLOefPJJ7d+/Xx6PR08++WStfR566CEtXLhQP//5z/XSSy8119itxg9+8AMVFhbq008/1bhx43Tq1KlGbZekyMhIXXnllerfv7/WrVun9957L3g6Hg137gfroUOH9M033+i5556r9dLrM888o1tvvVUpKSnasWOHjZO2Hg157sbFxenKK6/UmDFjlJubW+tdlJciYqaVGDdunM6cOaOzZ89q7Nixdo9jvJiYGI0dO1Y5OTl1vjPp229H/bb27dvriiuuqPM+CxYsUFZWltLT07Vx48ZQj9zqdOvWTdu3b1dZWVmdwXKx7d/Wpk0bPfjgg3r44YdrvfMPF3fuB2t8fHyd18NYlqVnn31W6enpGj9+vLZv327DlK1XQ567Q4cO1aBBg/TII4+08HTOQcy0Em3bttX+/fv18ccfc01GiOTk5Ki6ulpDhw7Vyy+/rEOHDmn//v1asWKFhg8frs2bN+u2227T5s2bdfDgQR04cEBPPvmk3njjDU2cOLHOx3zooYe0ZMkSpaen68UXX2zh78g8Xq9XhYWFOnnypMaOHSufz9eo7d928803q23btsrJyWnusS85lmVp9erVuv322zV+/Hiu1wuxhjx358yZo2eeeUaffvppC07mHMRMKxIdHa3o6Gi7x2g1evTooT179igpKUnz5s3TNddcox//+Mfatm2bVq1apd69e6tDhw6aN2+eBgwYoOuuu04vvfSS1q5dq6lTp9b7uA888IAeffRRTZ06VevXr2/B78hMXbt2VWFhof75z3/WGSwX235OWFiY7rnnHi1durTezwFC01mWpZycHE2fPl2pqamX9NuEQ60hz91x48YpISHhkj07YwUaeqUjAACAA3FmBgAAGI2YAQAARiNmAACA0YgZAABgNGIGAAAYjZgBAABGI2YAAIDRiBkAAGA0YgYAABiNmAHQIizLuuCSlZVl94gADHX+r0AFgGbw2WefBf9748aNWrhwoQ4cOBBc17FjRzvGAtAKcGYGQIuIi4sLLm63W5Zl1Vq3YcMG9erVS+Hh4UpMTNTTTz9d6/7z589Xz5491aFDB/Xo0UMLFizQ2bNng9uzsrI0YMAArVu3TvHx8erYsaNmzpyp6upqLV26VHFxcercuXOtX8QXCASUlZWl+Ph4uVwueTwezZ49u8WOCYDQ4MwMANu98MILWrhwoVauXKmBAwfqr3/9q2bMmKHIyEhNmzZNkhQVFaW8vDx5PB7t27dPM2bMUFRUlO6///7g4xw+fFhbtmxRQUGBDh8+rJtuuklHjhxRz549tX37dhUVFenOO+9UcnKyhg0bppdfflnLli3Thg0b1KdPH5WVlWnv3r12HQYATRUAgBaWm5sbcLvdwdtXXHFFYP369bX2WbJkSWD48OH1PsYTTzwRGDRoUPD2okWLAh06dAj4fL7gurFjxwa6d+8eqK6uDq67+uqrA9nZ2YFAIBD47W9/G+jZs2fgzJkz3/VbAmAjzswAsFVlZaUOHz6sX/ziF5oxY0ZwfVVVldxud/D2xo0btWLFCh0+fFgVFRWqqqpSdHR0rcfq3r27oqKigre7dOmitm3bqk2bNrXWnTx5UpJ08803a/ny5erRo4fGjRun8ePHKy0tTWFh/NMImIRrZgDYqqKiQpK0Zs0aFRcXB5ePPvpIu3btkiTt3LlT6enpGj9+vDZv3qy//vWveuihh3TmzJlaj9WuXbtaty3LqnNdTU2NJMnr9erAgQN6+umnFRERoZkzZ2rUqFG1rsUB4Hz87wcAW3Xp0kUej0dHjhxRenp6nfsUFRWpW7dueuihh4Lrjh07FpKvHxERobS0NKWlpSkjI0OJiYnat2+frr322pA8PoDmR8wAsN3ixYs1e/Zsud1ujRs3Tn6/X7t379aXX36puXPn6qqrrtLx48e1YcMGDRkyRK+//rry8/O/89fNy8tTdXW1hg0bpg4dOuj5559XRESEunXrFoLvCkBL4WUmALb7z//8T61du1a5ubnq27evrr/+euXl5SkhIUGSNGHCBN1777265557NGDAABUVFWnBggXf+et26tRJa9as0YgRI9SvXz/96U9/0h//+EfFxsZ+58cG0HKsQCAQsHsIAACApuLMDAAAMBoxAwAAjEbMAAAAoxEzAADAaMQMAAAwGjEDAACMRswAAACjETMAAMBoxAwAADAaMQMAAIxGzAAAAKP9PwxonfMq/0BwAAAAAElFTkSuQmCC" style="max-width: 100%"></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Most expensive ten players in the list</span>
+ipl<span class="token punctuation">.</span>nlargest<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'Price Cr'</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [9]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Player Name</th>
+      <th>Type</th>
+      <th>Price Cr</th>
+      <th>Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>146</th>
+      <td>146</td>
+      <td>Sam Curran</td>
+      <td>All-Rounder</td>
+      <td>18.50</td>
+      <td>Punjab Kings</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>122</td>
+      <td>Cameron Green</td>
+      <td>All-Rounder</td>
+      <td>17.50</td>
+      <td>Mumbai Indians</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>97</td>
+      <td>KL Rahul</td>
+      <td>Batter</td>
+      <td>17.00</td>
+      <td>Lucknow Super Giants</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>Ben Stokes</td>
+      <td>All-Rounder</td>
+      <td>16.25</td>
+      <td>Chennai Super Kings</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>Ravindra Jadeja</td>
+      <td>All-Rounder</td>
+      <td>16.00</td>
+      <td>Chennai Super Kings</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>25</td>
+      <td>Rishabh Pant</td>
+      <td>Wicket-Keeper</td>
+      <td>16.00</td>
+      <td>Delhi Capitals</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>75</td>
+      <td>Andre Russell</td>
+      <td>All-Rounder</td>
+      <td>16.00</td>
+      <td>Kolkata Knight Riders</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>98</td>
+      <td>Nicholas Pooran</td>
+      <td>Wicket-Keeper</td>
+      <td>16.00</td>
+      <td>Lucknow Super Giants</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>123</td>
+      <td>Rohit Sharma</td>
+      <td>Batter</td>
+      <td>16.00</td>
+      <td>Mumbai Indians</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>124</td>
+      <td>Ishan Kishan</td>
+      <td>Wicket-Keeper</td>
+      <td>15.25</td>
+      <td>Mumbai Indians</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [12]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#team RR</span>
+ipl<span class="token punctuation">[</span>ipl<span class="token punctuation">[</span><span class="token string">'Team'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'Rajasthan Royals'</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [12]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Player Name</th>
+      <th>Type</th>
+      <th>Price Cr</th>
+      <th>Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>193</th>
+      <td>193</td>
+      <td>Sanju Samson</td>
+      <td>Wicket-Keeper</td>
+      <td>14.00</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>194</th>
+      <td>194</td>
+      <td>Prasidh Krishna</td>
+      <td>Bowler</td>
+      <td>10.00</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>195</td>
+      <td>Jos Buttler</td>
+      <td>Wicket-Keeper</td>
+      <td>10.00</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>196</td>
+      <td>Shimron Hetmyer</td>
+      <td>Batter</td>
+      <td>8.50</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>197</th>
+      <td>197</td>
+      <td>Trent Boult</td>
+      <td>Bowler</td>
+      <td>8.00</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>198</th>
+      <td>198</td>
+      <td>Devdutt Padikkal</td>
+      <td>Batter</td>
+      <td>7.75</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>199</th>
+      <td>199</td>
+      <td>Yuzvendra Chahal</td>
+      <td>Bowler</td>
+      <td>6.50</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>200</th>
+      <td>200</td>
+      <td>Jason Holder</td>
+      <td>All-Rounder</td>
+      <td>5.75</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>201</th>
+      <td>201</td>
+      <td>Ravichandran Ashwin</td>
+      <td>All-Rounder</td>
+      <td>5.00</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>202</th>
+      <td>202</td>
+      <td>Yashasvi Jaiswal</td>
+      <td>Batter</td>
+      <td>4.00</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>203</th>
+      <td>203</td>
+      <td>Riyan Parag</td>
+      <td>Batter</td>
+      <td>3.80</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>204</th>
+      <td>204</td>
+      <td>Navdeep Saini</td>
+      <td>Bowler</td>
+      <td>2.60</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>205</th>
+      <td>205</td>
+      <td>Adam Zampa</td>
+      <td>Bowler</td>
+      <td>1.50</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>206</th>
+      <td>206</td>
+      <td>Joe Root</td>
+      <td>Batter</td>
+      <td>1.00</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>207</th>
+      <td>207</td>
+      <td>Obed McCoy</td>
+      <td>Bowler</td>
+      <td>0.75</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>208</th>
+      <td>208</td>
+      <td>D Ferreira</td>
+      <td>Wicket-Keeper</td>
+      <td>0.50</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>209</th>
+      <td>209</td>
+      <td>KM Asif</td>
+      <td>Bowler</td>
+      <td>0.30</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>210</th>
+      <td>210</td>
+      <td>KC Cariappa</td>
+      <td>Bowler</td>
+      <td>0.30</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>211</th>
+      <td>211</td>
+      <td>Kuldeep Sen</td>
+      <td>Bowler</td>
+      <td>0.20</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>212</th>
+      <td>212</td>
+      <td>Dhruv Jurel</td>
+      <td>Wicket-Keeper</td>
+      <td>0.20</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>213</th>
+      <td>213</td>
+      <td>Kunal Singh Rathore</td>
+      <td>Wicket-Keeper</td>
+      <td>0.20</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>214</th>
+      <td>214</td>
+      <td>Abdul Basith</td>
+      <td>All-Rounder</td>
+      <td>0.20</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>215</th>
+      <td>215</td>
+      <td>Akash Vasisht</td>
+      <td>All-Rounder</td>
+      <td>0.20</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>216</th>
+      <td>216</td>
+      <td>Murugan Ashwin</td>
+      <td>Bowler</td>
+      <td>0.20</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>217</th>
+      <td>217</td>
+      <td>Kuldip Yadav</td>
+      <td>Bowler</td>
+      <td>0.20</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#All-rounders in rajasthan royals</span>
+ipl<span class="token punctuation">[</span><span class="token punctuation">(</span>ipl<span class="token punctuation">[</span><span class="token string">'Type'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'All-Rounder'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span>ipl<span class="token punctuation">[</span><span class="token string">'Team'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'Rajasthan Royals'</span><span class="token punctuation">)</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [11]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Player Name</th>
+      <th>Type</th>
+      <th>Price Cr</th>
+      <th>Team</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>200</th>
+      <td>200</td>
+      <td>Jason Holder</td>
+      <td>All-Rounder</td>
+      <td>5.75</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>201</th>
+      <td>201</td>
+      <td>Ravichandran Ashwin</td>
+      <td>All-Rounder</td>
+      <td>5.00</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>214</th>
+      <td>214</td>
+      <td>Abdul Basith</td>
+      <td>All-Rounder</td>
+      <td>0.20</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+    <tr>
+      <th>215</th>
+      <td>215</td>
+      <td>Akash Vasisht</td>
+      <td>All-Rounder</td>
+      <td>0.20</td>
+      <td>Rajasthan Royals</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div><p>Want me to add some more details then do message me over my gmail or WhatsApp ID</p>
+</div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div></div>

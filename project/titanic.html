@@ -1,0 +1,657 @@
+<div style="max-width: 960px;border: 1px solid&nbsp;#ccc;margin: 1em auto;padding: 1.5em 1.5em 1.5em 7em;background-color: white;box-shadow: 0 0 10px #ccc"><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [1]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd</code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [2]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">data <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'train.csv'</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [3]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">data<span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [3]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C85</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>C123</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [5]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">data<span class="token punctuation">.</span>tail<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [5]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>888</th>
+      <td>889</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Johnston, Miss. Catherine Helen "Carrie"</td>
+      <td>female</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>2</td>
+      <td>W./C. 6607</td>
+      <td>23.45</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>889</th>
+      <td>890</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Behr, Mr. Karl Howell</td>
+      <td>male</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>111369</td>
+      <td>30.00</td>
+      <td>C148</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>890</th>
+      <td>891</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Dooley, Mr. Patrick</td>
+      <td>male</td>
+      <td>32.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>370376</td>
+      <td>7.75</td>
+      <td>NaN</td>
+      <td>Q</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [7]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">data<span class="token punctuation">.</span>shape</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [7]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">(891, 12)</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [8]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">data<span class="token punctuation">.</span>info</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [8]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">&lt;bound method DataFrame.info of      PassengerId  Survived  Pclass  \
+0              1         0       3   
+1              2         1       1   
+2              3         1       3   
+3              4         1       1   
+4              5         0       3   
+..           ...       ...     ...   
+886          887         0       2   
+887          888         1       1   
+888          889         0       3   
+889          890         1       1   
+890          891         0       3   
+
+                                                  Name     Sex   Age  SibSp  \
+0                              Braund, Mr. Owen Harris    male  22.0      1   
+1    Cumings, Mrs. John Bradley (Florence Briggs Th...  female  38.0      1   
+2                               Heikkinen, Miss. Laina  female  26.0      0   
+3         Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1   
+4                             Allen, Mr. William Henry    male  35.0      0   
+..                                                 ...     ...   ...    ...   
+886                              Montvila, Rev. Juozas    male  27.0      0   
+887                       Graham, Miss. Margaret Edith  female  19.0      0   
+888           Johnston, Miss. Catherine Helen "Carrie"  female   NaN      1   
+889                              Behr, Mr. Karl Howell    male  26.0      0   
+890                                Dooley, Mr. Patrick    male  32.0      0   
+
+     Parch            Ticket     Fare Cabin Embarked  
+0        0         A/5 21171   7.2500   NaN        S  
+1        0          PC 17599  71.2833   C85        C  
+2        0  STON/O2. 3101282   7.9250   NaN        S  
+3        0            113803  53.1000  C123        S  
+4        0            373450   8.0500   NaN        S  
+..     ...               ...      ...   ...      ...  
+886      0            211536  13.0000   NaN        S  
+887      0            112053  30.0000   B42        S  
+888      2        W./C. 6607  23.4500   NaN        S  
+889      0            111369  30.0000  C148        C  
+890      0            370376   7.7500   NaN        Q  
+
+[891 rows x 12 columns]&gt;</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [11]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">data<span class="token punctuation">.</span>describe<span class="token punctuation">(</span>include<span class="token operator">=</span><span class="token string">'all'</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [11]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>891.000000</td>
+      <td>891.000000</td>
+      <td>891.000000</td>
+      <td>891</td>
+      <td>891</td>
+      <td>714.000000</td>
+      <td>891.000000</td>
+      <td>891.000000</td>
+      <td>891</td>
+      <td>891.000000</td>
+      <td>204</td>
+      <td>889</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>891</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>681</td>
+      <td>NaN</td>
+      <td>147</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>347082</td>
+      <td>NaN</td>
+      <td>B96 B98</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>freq</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>577</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7</td>
+      <td>NaN</td>
+      <td>4</td>
+      <td>644</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>446.000000</td>
+      <td>0.383838</td>
+      <td>2.308642</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>29.699118</td>
+      <td>0.523008</td>
+      <td>0.381594</td>
+      <td>NaN</td>
+      <td>32.204208</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>257.353842</td>
+      <td>0.486592</td>
+      <td>0.836071</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>14.526497</td>
+      <td>1.102743</td>
+      <td>0.806057</td>
+      <td>NaN</td>
+      <td>49.693429</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.420000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>223.500000</td>
+      <td>0.000000</td>
+      <td>2.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>20.125000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>7.910400</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>446.000000</td>
+      <td>0.000000</td>
+      <td>3.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>28.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>14.454200</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>668.500000</td>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>38.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>31.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>891.000000</td>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>80.000000</td>
+      <td>8.000000</td>
+      <td>6.000000</td>
+      <td>NaN</td>
+      <td>512.329200</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [13]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">data<span class="token punctuation">[</span>data<span class="token punctuation">[</span><span class="token string">'Sex'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'male'</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [13]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Moran, Mr. James</td>
+      <td>male</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>330877</td>
+      <td>8.4583</td>
+      <td>NaN</td>
+      <td>Q</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>0</td>
+      <td>1</td>
+      <td>McCarthy, Mr. Timothy J</td>
+      <td>male</td>
+      <td>54.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>17463</td>
+      <td>51.8625</td>
+      <td>E46</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Palsson, Master. Gosta Leonard</td>
+      <td>male</td>
+      <td>2.0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>349909</td>
+      <td>21.0750</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>883</th>
+      <td>884</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Banfield, Mr. Frederick James</td>
+      <td>male</td>
+      <td>28.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>C.A./SOTON 34068</td>
+      <td>10.5000</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>884</th>
+      <td>885</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Sutehall, Mr. Henry Jr</td>
+      <td>male</td>
+      <td>25.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>SOTON/OQ 392076</td>
+      <td>7.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>886</th>
+      <td>887</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Montvila, Rev. Juozas</td>
+      <td>male</td>
+      <td>27.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>211536</td>
+      <td>13.0000</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>889</th>
+      <td>890</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Behr, Mr. Karl Howell</td>
+      <td>male</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>111369</td>
+      <td>30.0000</td>
+      <td>C148</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>890</th>
+      <td>891</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Dooley, Mr. Patrick</td>
+      <td>male</td>
+      <td>32.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>370376</td>
+      <td>7.7500</td>
+      <td>NaN</td>
+      <td>Q</td>
+    </tr>
+  </tbody>
+</table>
+<p>577 rows × 12 columns</p>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [14]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">sum<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'Sex'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'male'</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [14]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">577</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [16]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#deaths</span>
+sum<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'Survived'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [16]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">549</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [20]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">data<span class="token punctuation">.</span>isnull<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [20]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">PassengerId      0
+Survived         0
+Pclass           0
+Name             0
+Sex              0
+Age            177
+SibSp            0
+Parch            0
+Ticket           0
+Fare             0
+Cabin          687
+Embarked         2
+dtype: int64</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [24]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> pp</code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [26]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">per_missing <span class="token operator">=</span> data<span class="token punctuation">.</span>isnull<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">100</span> <span class="token operator">/</span> len<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+per_missing</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [26]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">PassengerId     0.000000
+Survived        0.000000
+Pclass          0.000000
+Name            0.000000
+Sex             0.000000
+Age            19.865320
+SibSp           0.000000
+Parch           0.000000
+Ticket          0.000000
+Fare            0.000000
+Cabin          77.104377
+Embarked        0.224467
+dtype: float64</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [34]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">data<span class="token punctuation">[</span><span class="token string">'Sex'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>unique<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [34]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">array(['male', 'female'], dtype=object)</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div></div>

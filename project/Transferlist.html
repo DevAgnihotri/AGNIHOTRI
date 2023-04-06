@@ -1,0 +1,661 @@
+<div style="max-width: 960px;border: 1px solid&nbsp;#ccc;margin: 1em auto;padding: 1.5em 1.5em 1.5em 7em;background-color: white;box-shadow: 0 0 10px #ccc"><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [1]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#loading the required libraries</span>
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">from</span> matplotlib <span class="token keyword">import</span> pyplot <span class="token keyword">as</span> plt
+<span class="token comment" spellcheck="true">#import seaborn as sns</span></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [2]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#loading the Transfer list dataset</span>
+pla<span class="token operator">=</span>pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'dataset.csv'</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [3]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#having a glance at records of the dataset</span>
+pla</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [3]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pos.</th>
+      <th>Player</th>
+      <th>Year</th>
+      <th>Fee</th>
+      <th>From Club</th>
+      <th>To Club</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Neymar</td>
+      <td>2017</td>
+      <td>€222m</td>
+      <td>Barcelona</td>
+      <td>PSG</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Kylian Mbappe</td>
+      <td>2017</td>
+      <td>€145m</td>
+      <td>Monaco</td>
+      <td>PSG</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Joao Felix</td>
+      <td>2019</td>
+      <td>€126m</td>
+      <td>Benfica</td>
+      <td>Atletico Madrid</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Enzo Fernandez</td>
+      <td>2023</td>
+      <td>€121m</td>
+      <td>Benfica</td>
+      <td>Chelsea</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Philippe Coutinho</td>
+      <td>2018</td>
+      <td>€120m</td>
+      <td>Liverpool</td>
+      <td>Barcelona</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>90</td>
+      <td>Victor Osimhen</td>
+      <td>2020</td>
+      <td>€50m</td>
+      <td>Lille</td>
+      <td>Napoli</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>97</td>
+      <td>Anthony Martial</td>
+      <td>2015</td>
+      <td>€49.3m</td>
+      <td>Monaco</td>
+      <td>Manchester United</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>98</td>
+      <td>Gylfi Sigurdsson</td>
+      <td>2017</td>
+      <td>€49.2m</td>
+      <td>Swansea City</td>
+      <td>Everton</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>99</td>
+      <td>Leroy Sane</td>
+      <td>2020</td>
+      <td>€49m</td>
+      <td>Manchester City</td>
+      <td>Bayern Munich</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>99</td>
+      <td>Christian Vieri</td>
+      <td>1999</td>
+      <td>€49m</td>
+      <td>Lazio</td>
+      <td>Inter</td>
+    </tr>
+  </tbody>
+</table>
+<p>102 rows × 6 columns</p>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [4]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Looking at the number of rows(no. of palyers) and columns in dataset</span>
+pla<span class="token punctuation">.</span>shape</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [4]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">(102, 6)</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [5]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Getting the frequency of teams buying most no. players in the list</span>
+pla<span class="token punctuation">[</span><span class="token string">'To Club'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value_counts<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [5]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;"> Chelsea              15
+ Manchester City      13
+ Manchester United    12
+ Barcelona            11
+ Real Madrid          10
+ PSG                   6
+ Juventus              6
+ Arsenal               6
+ Liverpool             5
+ Atletico Madrid       3
+ Bayern Munich         2
+ Tottenham             2
+ Shanghai SIPG         2
+ Inter                 2
+ Newcastle United      1
+&nbsp;Manchester City       1
+&nbsp;Bayern Munich         1
+&nbsp;Lazio                 1
+ Jiangsu Suning        1
+ Napoli                1
+ Everton               1
+Name: To Club, dtype: int64</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [6]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#making a bar-plot for the top 5 teams buying most no. players in the list</span>
+plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>bar<span class="token punctuation">(</span>list<span class="token punctuation">(</span>pla<span class="token punctuation">[</span><span class="token string">'To Club'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value_counts<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>list<span class="token punctuation">(</span>pla<span class="token punctuation">[</span><span class="token string">'To Club'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value_counts<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Teams'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'No of times'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><div style="min-height: 1em;"><img src="data:image/png;base64,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brN3715jzLX3hmeeecber0OHDqZ+/fpmy5YtZufOnaZFixbGx8cn1/eZkozAb0G1atUynTp1umW/Pn36mPDwcHP16lV729/+9jfTrVs3Y4wxx44dM6VLlzYnT550WK5t27Zm5MiRxpicgd/Pz8/+QXijxx9/3DzxxBMObRs3bjSlSpUyv/32W67L7Nixw0gyv/zyyy3/npLg+jfGLl26mHHjxhljjGnTpo158803c4TA3HTs2NE8++yz9ulWrVqZ3//+9w59mjZtaoYPH26MMWb16tWmVKlSJikpKdfnmz17tpFkDh48aG+bPn26qVKlin363nvvzRGox48fb5o3b26MMebpp582f/zjH01WVlau67g+WGVr27atmThxokPbvHnzTHBwsMNyQ4YMyfU5sy1atMhIMrt3775pv+sDvzF5f0gNHDjQ4cNsypQppmrVqnn+bXlhrP/HWWNtTMEC/8221Y213rh/ZLvV9njvvfdMYGCgw3vYjBkz3DLw+/r6Gl9fX+Ph4WFKlSplXnnllZsu99NPPxlJZt++fcaY/22j+Ph4h34hISHmxRdfzPU5Nm7caPz9/c2lS5cc2u+9917z3nvvGWNyjl1ISIiZMGGCQ/+mTZuap556yqGODz74wD7/+++/dwiyubnx9WR1N467JCPJIR8443O5IIF/2bJl5t577zVZWVlmzpw5pmHDhsYYkyPw3+hf//qXCQwMtE93797dPPjggw59unXrliPwe3p62g88ZLs+8CclJRlJZvv27fb5+/fvN5IsF/g5pceCTAF+PDkqKkqlS5e2TwcHB9u/qtu3b58yMzNVvXp1lStXzv74+uuvHb7mvd6wYcPUv39/RUdHa9KkSQ799u7dq4SEBIfnateunbKysnTkyBFJ0q5duxQTE6OwsDD5+fmpVatWkqTjx48XeDu4u8cee0wJCQk6fPiwtmzZop49e+bok5mZqfHjx6tu3bqqWLGiypUrp9WrV+fYHvXq1XOYvn4cExMTdc8996h69ep51lK2bFnde++9uS5/8eJFHTp0SI8//rjD2L3yyiv28e3bt68SExNVo0YNxcbG5us6kb179+rll192eM4BAwbo9OnTDheWN2nS5KbPU5D9PT8GDBigNWvW6OTJk5KufW3ct2/fQl1gy1g7Z6wL6mbbKj/ysz3279+vevXq2U8XkKTmzZs75w9wso0bNyoxMVGJiYn64IMPNHHiRM2YMcM+/8CBA+revbuqVq0qf39/+ylZN+6D149TSkqKTp06pbZt2+a6zr179yo9PV2BgYEO2/DIkSO5fo6kpaXp1KlTatmypUN7y5YttX//foe268c3ODjYXo+U/9fTnWDjxo3atWuXEhISVL16db377rv2ecX9udyxY0elp6drw4YNmjVrlh577LFc+3355Zdq27at7r77bvn5+alXr146d+6c/f1i//79atasmcMyub3uwsPDValSpTzr2b9/vzw8PNS4cWN7W82aNS15N7PivXoNxaJ69eoO5+fdjKenp8O0zWZTVlaWJCk9PV2lS5fWrl27HP5TIEnlypXL9fnGjh2rHj16aMWKFVq5cqXGjBmjhQsXqmvXrkpPT9eTTz6p2NjYHMuFhYXp4sWLateundq1a6f58+erUqVKOn78uNq1a+eSC4yKWocOHfTEE0/o8ccfV0xMjAIDA3P0ee211/Tmm28qPj7efj7jkCFDcmyPm42jj4/PLWvJbfnsIJ193uTMmTNzvMFm7xeNGjXSkSNHtHLlSn355Zf6+9//rujoaP373//Oc53p6ekaN26c/vKXv+SYd314utXFXNnh9scff1TDhg1v2jc/GjZsqPr162vu3Ln685//rO+//14rVqwo1HMy1s4Za0ny9/dXampqjvYLFy4oICDAoe1m2yo/8rM9SpLIyEh7kImKitK2bds0YcIEDRw4UJIUExOj8PBwzZw5UyEhIcrKylKdOnVy7IPXj9Ot9rn09HQFBwfneu1XYUPV9eOb/R/y7PHN7+vpTpA97jVq1FBKSoq6deumDRs2SFKxfy57eHioV69eGjNmjLZt25bjhgbStWs0HnroIQ0cOFATJkxQxYoVtWnTJj3++OO6fPmyypYtm+/1FcfFwCUFgd+CevTooUceeUSffPKJOnfu7DDPGKO0tLQcH4y5adiwoTIzM5WSkqI//OEP+V5/9erVVb16dQ0dOlTdu3fX7Nmz1bVrVzVq1Eg//PCDqlWrluty+/bt07lz5zRp0iSFhoZKksMFv1bj4eGh3r1769VXX9XKlStz7fPNN9+oc+fOevTRRyVd+zBLTk5W7dq1872eevXq6T//+Y+Sk5NveuQ3L1WqVFFISIgOHz6c65HpbP7+/urWrZu6deumhx9+WO3bt9d///tfVaxYUZ6ensrMzHTo36hRIyUlJeW5P+RXgwYNVLt2bU2ZMkXdunVTqVKOX1xeuHAh12BRpkwZScpRlyT1799f8fHxOnnypKKjo+374+1irJ0z1pJUo0YN7dq1K0f77t27VaNGjdt+3tz2h/xsj1q1amnevHm6dOmS/T8vW7duve06ilPp0qX122+/Sbp2kWtSUpJmzpxpf7/ftGnTLZ/Dz89PERERWrt2bY4bQkjXxv7MmTPy8PBwuIg7L/7+/goJCdE333xjP5IsXXt93H///fn8y5zzerKiQYMGKS4uTkuXLnXZ5/Jjjz2m119/Xd26dVOFChVyzN+1a5eysrI0ZcoU+/v54sWLHfrUqlVL27Ztc2i7ndddzZo1dfXqVe3atUtNmzaVdO2uRq7+TYGiwCk9FvT3v/9d3bp1U/fu3TVx4kTt3LlTx44d0/LlyxUdHa1169bl63mqV6+unj17qnfv3vr444915MgRbd++XXFxcbke8fztt980ePBgrV+/XseOHdM333yjHTt2qFatWpKk4cOHa/PmzRo8eLASExN14MABffLJJ/a7OYSFhalMmTJ66623dPjwYX366aeWv1fu+PHj9dNPP6ldu3a5zr/vvvv0xRdfaPPmzdq/f7+efPJJnT17tkDraNWqlR544AH99a9/1RdffGE/Onv9XS9uZdy4cYqLi9O0adOUnJysffv2afbs2Zo6daqka3dUWLBggX788UclJyfrX//6l4KCguxBOzsQnDlzRufPn5ckjR49WnPnztW4ceP0/fffa//+/Vq4cKFeeumlAv19NptNs2fPVnJysv7whz/o888/1+HDh/Xtt99qwoQJOf7Tmy08PFw2m03Lly/XTz/95HAHiB49eug///mPZs6cmedXzgXFWBd+rCVp6NChWrFihSZMmKD9+/fru+++04svvqgtW7bomWeeKfDzZatcubJ8fHy0atUqnT171v4twq22R48ePWSz2TRgwAD98MMP+vzzz/X666/fdh1FKSUlRWfOnNGxY8f0r3/9S/PmzbO/PipUqKDAwEC9//77OnjwoL766isNGzYsX887duxYTZkyRdOmTdOBAwe0e/duvfXWW5Kk6OhoNW/eXF26dNGaNWt09OhRbd68WS+++GKewfH555/X5MmTtWjRIiUlJWnEiBFKTEws0Pg64/VkRWXLltWA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" style="max-width: 100%"></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [7]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Getting the frequency of team with most sales in th list</span>
+pla<span class="token punctuation">[</span><span class="token string">'From Club'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value_counts<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">9</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [7]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">Monaco                8
+Juventus              5
+Benfica               4
+Liverpool             4
+Manchester City       4
+Borussia Dortmund     4
+Real Madrid           4
+Chelsea               4
+Barcelona             3
+Name: From Club, dtype: int64</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [8]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#replacing the pound and 'm' symbol in it</span>
+pla<span class="token punctuation">[</span><span class="token string">'Fee'</span><span class="token punctuation">]</span> <span class="token operator">=</span> pla<span class="token punctuation">[</span><span class="token string">'Fee'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>str<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'€'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span>str<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'m'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span>float<span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [9]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">pla</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [9]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pos.</th>
+      <th>Player</th>
+      <th>Year</th>
+      <th>Fee</th>
+      <th>From Club</th>
+      <th>To Club</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Neymar</td>
+      <td>2017</td>
+      <td>222.0</td>
+      <td>Barcelona</td>
+      <td>PSG</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Kylian Mbappe</td>
+      <td>2017</td>
+      <td>145.0</td>
+      <td>Monaco</td>
+      <td>PSG</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Joao Felix</td>
+      <td>2019</td>
+      <td>126.0</td>
+      <td>Benfica</td>
+      <td>Atletico Madrid</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Enzo Fernandez</td>
+      <td>2023</td>
+      <td>121.0</td>
+      <td>Benfica</td>
+      <td>Chelsea</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Philippe Coutinho</td>
+      <td>2018</td>
+      <td>120.0</td>
+      <td>Liverpool</td>
+      <td>Barcelona</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>90</td>
+      <td>Victor Osimhen</td>
+      <td>2020</td>
+      <td>50.0</td>
+      <td>Lille</td>
+      <td>Napoli</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>97</td>
+      <td>Anthony Martial</td>
+      <td>2015</td>
+      <td>49.3</td>
+      <td>Monaco</td>
+      <td>Manchester United</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>98</td>
+      <td>Gylfi Sigurdsson</td>
+      <td>2017</td>
+      <td>49.2</td>
+      <td>Swansea City</td>
+      <td>Everton</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>99</td>
+      <td>Leroy Sane</td>
+      <td>2020</td>
+      <td>49.0</td>
+      <td>Manchester City</td>
+      <td>Bayern Munich</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>99</td>
+      <td>Christian Vieri</td>
+      <td>1999</td>
+      <td>49.0</td>
+      <td>Lazio</td>
+      <td>Inter</td>
+    </tr>
+  </tbody>
+</table>
+<p>102 rows × 6 columns</p>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [10]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Extracting the records where a team has purchased a player equal to or with a lesser value than 100</span>
+pla<span class="token punctuation">[</span>pla<span class="token punctuation">[</span><span class="token string">'Fee'</span><span class="token punctuation">]</span><span class="token operator">&lt;=</span><span class="token number">100</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [10]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pos.</th>
+      <th>Player</th>
+      <th>Year</th>
+      <th>Fee</th>
+      <th>From Club</th>
+      <th>To Club</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>Cristiano Ronaldo</td>
+      <td>2018</td>
+      <td>100.0</td>
+      <td>Real Madrid</td>
+      <td>Juventus</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>12</td>
+      <td>Eden Hazard</td>
+      <td>2019</td>
+      <td>100.0</td>
+      <td>Chelsea</td>
+      <td>Real Madrid</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>12</td>
+      <td>Mykhailo Mudryk</td>
+      <td>2023</td>
+      <td>100.0</td>
+      <td>Shakhtar Donetsk</td>
+      <td>Chelsea</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>14</td>
+      <td>Antony</td>
+      <td>2022</td>
+      <td>95.0</td>
+      <td>Ajax</td>
+      <td>Manchester United</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>15</td>
+      <td>Cristiano Ronaldo</td>
+      <td>2009</td>
+      <td>94.0</td>
+      <td>Manchester United</td>
+      <td>Real Madrid</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>90</td>
+      <td>Victor Osimhen</td>
+      <td>2020</td>
+      <td>50.0</td>
+      <td>Lille</td>
+      <td>Napoli</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>97</td>
+      <td>Anthony Martial</td>
+      <td>2015</td>
+      <td>49.3</td>
+      <td>Monaco</td>
+      <td>Manchester United</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>98</td>
+      <td>Gylfi Sigurdsson</td>
+      <td>2017</td>
+      <td>49.2</td>
+      <td>Swansea City</td>
+      <td>Everton</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>99</td>
+      <td>Leroy Sane</td>
+      <td>2020</td>
+      <td>49.0</td>
+      <td>Manchester City</td>
+      <td>Bayern Munich</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>99</td>
+      <td>Christian Vieri</td>
+      <td>1999</td>
+      <td>49.0</td>
+      <td>Lazio</td>
+      <td>Inter</td>
+    </tr>
+  </tbody>
+</table>
+<p>91 rows × 6 columns</p>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [11]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">PSG_players <span class="token operator">=</span> pla<span class="token punctuation">[</span>pla<span class="token punctuation">[</span><span class="token string">'To Club'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>str<span class="token punctuation">.</span>contains<span class="token punctuation">(</span><span class="token string">'PSG'</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+PSG_players</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [11]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pos.</th>
+      <th>Player</th>
+      <th>Year</th>
+      <th>Fee</th>
+      <th>From Club</th>
+      <th>To Club</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Neymar</td>
+      <td>2017</td>
+      <td>222.0</td>
+      <td>Barcelona</td>
+      <td>PSG</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Kylian Mbappe</td>
+      <td>2017</td>
+      <td>145.0</td>
+      <td>Monaco</td>
+      <td>PSG</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>56</td>
+      <td>Edinson Cavani</td>
+      <td>2013</td>
+      <td>64.5</td>
+      <td>Napoli</td>
+      <td>PSG</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>59</td>
+      <td>David Luiz</td>
+      <td>2014</td>
+      <td>62.5</td>
+      <td>Chelsea</td>
+      <td>PSG</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>60</td>
+      <td>Angel Di Maria</td>
+      <td>2015</td>
+      <td>61.6</td>
+      <td>Manchester United</td>
+      <td>PSG</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>62</td>
+      <td>Achraf Hakimi</td>
+      <td>2021</td>
+      <td>60.0</td>
+      <td>Inter</td>
+      <td>PSG</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [12]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">pla<span class="token punctuation">.</span>groupby<span class="token punctuation">(</span><span class="token string">'To Club'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'Fee'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sort_values<span class="token punctuation">(</span>ascending<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [12]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">To Club
+ Chelsea              1127.50
+ Barcelona             882.00
+ Manchester United     871.00
+ Manchester City       856.50
+ Real Madrid           777.30
+ PSG                   615.60
+ Juventus              464.00
+ Arsenal               356.65
+ Liverpool             342.50
+ Atletico Madrid       257.00
+ Inter                 129.00
+ Shanghai SIPG         118.90
+ Tottenham             118.00
+ Bayern Munich         116.00
+&nbsp;Bayern Munich          80.00
+&nbsp;Manchester City        75.00
+ Newcastle United       65.00
+&nbsp;Lazio                  55.00
+ Jiangsu Suning         50.00
+ Napoli                 50.00
+ Everton                49.20
+Name: Fee, dtype: float64</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [13]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Total fee and no. of players of the top 5 teams that spent most of the money</span>
+team_stats <span class="token operator">=</span> pla<span class="token punctuation">.</span>groupby<span class="token punctuation">(</span><span class="token string">'To Club'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>agg<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">'Fee'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'sum'</span><span class="token punctuation">,</span> <span class="token string">'count'</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+team_stats<span class="token punctuation">.</span>columns <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Total Fee'</span><span class="token punctuation">,</span> <span class="token string">'No. of Players'</span><span class="token punctuation">]</span>
+team_stats <span class="token operator">=</span> team_stats<span class="token punctuation">.</span>sort_values<span class="token punctuation">(</span>by<span class="token operator">=</span><span class="token string">'Total Fee'</span><span class="token punctuation">,</span> ascending<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+team_stats<span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [13]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total Fee</th>
+      <th>No. of Players</th>
+    </tr>
+    <tr>
+      <th>To Club</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Chelsea</th>
+      <td>1127.5</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>Barcelona</th>
+      <td>882.0</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>Manchester United</th>
+      <td>871.0</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>Manchester City</th>
+      <td>856.5</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>Real Madrid</th>
+      <td>777.3</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [16]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Total fee and no. of players of the top 5 teams that spent earned of the money</span>
+team_stats <span class="token operator">=</span> pla<span class="token punctuation">.</span>groupby<span class="token punctuation">(</span><span class="token string">'From Club'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>agg<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">'Fee'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'sum'</span><span class="token punctuation">,</span> <span class="token string">'count'</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+team_stats<span class="token punctuation">.</span>columns <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Total Fee'</span><span class="token punctuation">,</span> <span class="token string">'No. of Players'</span><span class="token punctuation">]</span>
+team_stats <span class="token operator">=</span> team_stats<span class="token punctuation">.</span>sort_values<span class="token punctuation">(</span>by<span class="token operator">=</span><span class="token string">'Total Fee'</span><span class="token punctuation">,</span> ascending<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>bar<span class="token punctuation">(</span>list<span class="token punctuation">(</span>team_stats<span class="token punctuation">[</span><span class="token string">'Total Fee'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>list<span class="token punctuation">(</span>team_stats<span class="token punctuation">[</span><span class="token string">'No. of Players'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Teams'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'No. of Players'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+team_stats<span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><div style="min-height: 1em;"><img src="data:image/png;base64,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0EFdu3ZVVFSU3nrrLY0YMaJc++TkZI0bN86aLy4utr58DgAAXHiqHFROOnr0qPLy8tSqVSvVqXPWm/HSqFEjtWnTRnv27Klwvdvtltvt9sm+AACA81V5MO2RI0c0YsQINWjQQLGxsdq/f78k6cEHH9S0adPOqZiSkhLl5uaqWbNm57QdAABwYahyUElOTtb27du1Zs0a1a9f31req1cvr19Vrozx48crKytL+/btU3Z2tvr37y9/f38NHjy4qmUBAIALUJWv2SxbtkyLFy/W7373O7lcLmt5bGyscnNzq7Str7/+WoMHD9b333+vJk2a6JprrtHGjRvVpEmTqpYFAAAuQFUOKgcPHlR4eHi55YcPH/YKLpWxaNGiqu4eAADUIlW+9HPVVVdpxYr/+xjjyXDy6quvqlu3br6rDAAA1HpV7lH529/+pvj4eO3cuVPHjx/Xc889p507dyo7O1tZWVnVUSMAAKilqtyjcs011ygnJ0fHjx9XXFyc/vWvfyk8PFwbNmxQ586dq6NGAABQS53VF6C0atVKc+bM8XUtAAAAXqrco9KzZ0/NmzdPP//8c3XUAwAAYKlyULniiis0fvx4RUREaOTIkdq4cWN11AUAAFD1oDJz5kx9++23mjt3rgoLC3XdddepXbt2mjFjhv773/9WR40AAKCWqnJQkaQ6dero97//vd599119/fXXuvvuuzVp0iRFRkbqjjvu0L///W9f1wkAAGqhswoqJ23atElTpkzR008/rfDwcCUnJyssLEy33Xabxo8f76saAQBALVXlT/0UFhbqjTfe0Ny5c/Xll1+qX79+WrhwoXr37m19+dvQoUPVp08fzZgxw+cFAwCA2qPKQeWSSy5Rq1atNHz4cA0dOrTC3+Xp0KGDunTp4pMCAQBA7VXloJKZmalrr732N9sEBwfrww8/POuiAAAApLMYo3KmkAIAAOArZ/XNtG+//bbeeust7d+/X0ePHvVat3XrVp8UBgAAUOUeleeff17Dhg1T06ZNtW3bNl199dUKDQ3V3r17FR8fXx01AgCAWqrKQeWll17SK6+8olmzZqlevXp69NFHlZGRoTFjxqioqKg6agQAALVUlYPK/v371b17d0lSQECAfvrpJ0nSn/70Jy1cuNC31QEAgFqtykElIiJCP/zwgySpRYsW1m/95OXlyRjj2+oAAECtVuWg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duzYoW7duumXX35RYGCgli5dqnbt2lXYNjU1VSkpKTVcIQBUn+iJK+wu4byxb1pfu0uADWz/9eTLLrtMOTk5+s9//qP7779fSUlJ2rlzZ4Vtk5OTVVRUZE35+fk1XC0AAKhJtveo1KtXTzExMZKkzp07a/PmzXruuef0j3/8o1xbt9stt9td0yUCAACb2N6j8mtlZWVe41AAAEDtZWuPSnJysuLj49WiRQv99NNPWrBggdasWaPVq1fbWRYAAHAIW4NKYWGhhgwZooKCAoWEhKhDhw5avXq1br75ZjvLAgAADmFrUHnttdfs3D0AAHA4x41RAQAAOImgAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHIugAgAAHMvWoJKamqouXbooKChI4eHhuuOOO7R79247SwIAAA5ia1DJysrSqFGjtHHjRmVkZOjYsWO65ZZbdPjwYTvLAgAADlHHzp2vWrXKaz4tLU3h4eH6+OOPdd1119lUFQAAcApbg8qvFRUVSZIaN25c4XqPxyOPx2PNFxcX10hdAADAHo4ZTFtWVqaHH35YPXr0UPv27Stsk5qaqpCQEGuKjIys4SoBAEBNckxQGTVqlD799FMtWrTotG2Sk5NVVFRkTfn5+TVYIQAAqGmOuPQzevRoLV++XGvXrtUll1xy2nZut1tut7sGKwMAAHayNagYY/Tggw9q6dKlWrNmjVq2bGlnOQAAwGFsDSqjRo3SggUL9O677yooKEgHDhyQJIWEhCggIMDO0gAAgAPYOkZl9uzZKioq0vXXX69mzZpZ0+LFi+0sCwAAOITtl34AAABOxzGf+gEAAPg1ggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsggoAAHAsW4PK2rVr1a9fPzVv3lwul0vLli2zsxwAAOAwtgaVw4cPq2PHjnrxxRftLAMAADhUHTt3Hh8fr/j4eDtLAAAADmZrUKkqj8cjj8djzRcXF9tYDQAAqG7n1WDa1NRUhYSEWFNkZKTdJQEAgGp0XgWV5ORkFRUVWVN+fr7dJQEAgGp0Xl36cbvdcrvddpcBAABqyHnVowIAAGoXW3tUSkpKtGfPHms+Ly9POTk5aty4sVq0aGFjZQAAwAlsDSpbtmzRDTfcYM2PGzdOkpSUlKS0tDSbqgIAAE5ha1C5/vrrZYyxswQAAOBgjFEBAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACORVABAACOZXtQefHFFxUdHa369eura9eu2rRpk90lAQAAh7A1qCxevFjjxo3TlClTtHXrVnXs2FG9e/dWYWGhnWUBAACHsDWoPPPMMxo5cqSGDRumdu3a6eWXX1aDBg30+uuv21kWAABwiDp27fjo0aP6+OOPlZycbC3z8/NTr169tGHDhgpv4/F45PF4rPmioiJJUnFxcbXUWOY5Ui3bvRD58n/Aca88jrs9OO728NVx55hXTXW8xp7cpjHmjG1tCyrfffedSktL1bRpU6/lTZs21eeff17hbVJTU5WSklJueWRkZLXUiMoLmWl3BbUTx90eHHd7cNztUZ3H/aefflJISMhvtrEtqJyN5ORkjRs3zpovKyvTDz/8oNDQULlcLhsrqxnFxcWKjIxUfn6+goOD7S6n1uC424Pjbg+Ouz1q23E3xuinn35S8+bNz9jWtqASFhYmf39//fe///Va/t///lcREREV3sbtdsvtdnsta9SoUXWV6FjBwcG14kR2Go67PTju9uC426M2Hfcz9aScZNtg2nr16qlz587KzMy0lpWVlSkzM1PdunWzqywAAOAgtl76GTdunJKSknTVVVfp6quv1syZM3X48GENGzbMzrIAAIBD2BpUBg0apIMHD2ry5Mk6cOCAOnXqpFWrVpUbYIsT3G63pkyZUu7yF6oXx90eHHd7cNztwXE/PZepzGeDAAAAbGD7V+gDAACcDkEFAAA4FkEFAAA4FkEFqIQjR45owIABCg4Olsvl0qFDhxQdHa2ZM2faXRpQ7TjXJZfLpWXLltldhs9cf/31evjhh+0uo1IIKudo6NChcrlcuu+++8qtGzVqlFwul4YOHVrzhdUCJ4/9ySk0NFR9+vTRJ5984vN9paen66OPPlJ2drYKCgoUEhKizZs365577vH5vpxm6NChuuOOO+wuw8vUqVPVqVMnu8vwmZo8l1GxM53nBQUFio+Pr7mCYCGo+EBkZKQWLVqkn3/+2Vr2yy+/aMGCBWrRooWNlV34+vTpo4KCAhUUFCgzM1N16tTRbbfd5vP95Obmqm3btmrfvr0iIiLkcrnUpEkTNWjQwOf7Qu1UHefy0aNHfVQdIiIiqvWjw6WlpSorK6u27Z/PCCo+cOWVVyoyMlJLliyxli1ZskQtWrTQFVdc4dXW4/FozJgxCg8PV/369XXNNddo8+bN1vo1a9bI5XIpMzNTV111lRo0aKDu3btr9+7dVpvc3FwlJCSoadOmCgwMVJcuXfTBBx+U28+ECRMUGRkpt9utmJgYvfbaa9b6rKwsXX311XK73WrWrJkmTpyo48eP+/rQVDu3262IiAhFRESoU6dOmjhxovLz83Xw4EGrTX5+vu688041atRIjRs3VkJCgvbt22etP/lOasaMGWrWrJlCQ0M1atQoHTt2TNKJLtKnn35aa9eulcvl0vXXXy+pfHf4oUOHdO+996pp06aqX7++2rdvr+XLl0uSvv/+ew0ePFgXX3yxGjRooLi4OC1cuLDaj4+vVXQJoFOnTpo6daok6e6779agQYO81h87dkxhYWGaN2+epBPfQJ2amqqWLVsqICBAHTt21Ntvv221P9NjIC0tTSkpKdq+fbvVA5GWlqZ9+/bJ5XIpJyfH2tahQ4fkcrm0Zs0aSdKPP/6oxMRENWnSRAEBAWrdurXmzp3r24N0lipzLk+YMEFt2rRRgwYNdOmll2rSpEnWeSr9X0/Tq6++qpYtW6p+/fqSfvvclKR169bp2muvVUBAgCIjIzVmzBgdPnz4tLXu379fCQkJCgwMVHBwsO68806vn0M5Wccbb7yh6OhohYSE6K677tJPP/1ktVm1apWuueYaNWrUSKGhobrtttuUm5vrk2NZHU699NO9e3dNmDDBa/3BgwdVt25drV27VtKJ5+Dx48fr4osvVsOGDdW1a1frPJROnMeNGjXSe++9p3bt2sntdmv//v3W81FKSoqaNGmi4OBg3XfffV6h80yvI9KF8xwvEVR8Zvjw4V5PeK+//nqF37D76KOP6p133lF6erq2bt2qmJgY9e7dWz/88INXu8cee0xPP/20tmzZojp16mj48OHWupKSEt16663KzMzUtm3b1KdPH/Xr10/79++32gwZMkQLFy7U888/r127dukf//iHAgMDJUnffPONbr31VnXp0kXbt2/X7Nmz9dprr+mvf/2rrw9LjSopKdH8+fMVExOj0NBQSSdeJHv37q2goCB99NFHWr9+vQIDA9WnTx+vB/6HH36o3Nxcffjhh0pPT1daWprS0tIknQidI0eOVLdu3VRQUOAVSE8qKytTfHy81q9fr/nz52vnzp2aNm2a/P39JZ3oYevcubNWrFihTz/9VPfcc4/+9Kc/adOmTdV/YGpQYmKi3n//fZWUlFjLVq9erSNHjqh///6STvwK+rx58/Tyyy/rs88+09ixY/XHP/5RWVlZXts63WNg0KBB+vOf/6zY2FirB+LX4eh0Jk2apJ07d2rlypXatWuXZs+erbCwMB/de9+p6FyWpKCgIKWlpWnnzp167rnnNGfOHD377LNet92zZ4/eeecdLVmyRDk5OWc8N3Nzc9WnTx8NGDBAn3zyiRYvXqx169Zp9OjRFdZWVlamhIQE/fDDD8rKylJGRob27t1b7n+Qm5urZcuWafny5Vq+fLmysrI0bdo0a/3hw4c1btw4bdmyRZmZmfLz81P//v3Pi16FxMRELVq0SKd+DdnixYvVvHlzXXvttZKk0aNHa8OGDVq0aJE++eQTDRw4UH369NGXX35p3ebIkSOaPn26Xn31VX322WcKDw+XJGVmZmrXrl1as2aNFi5cqCVLliglJcW63ZleRy6453iDc5KUlGQSEhJMYWGhcbvdZt++fWbfvn2mfv365uDBgyYhIcEkJSUZY4wpKSkxdevWNW+++aZ1+6NHj5rmzZubp556yhhjzIcffmgkmQ8++MBqs2LFCiPJ/Pzzz6etIzY21syaNcsYY8zu3buNJJORkVFh2//3//6fueyyy0xZWZm17MUXXzSBgYGmtLT0rI9FTUtKSjL+/v6mYcOGpmHDhkaSadasmfn444+tNm+88Ua5++rxeExAQIBZvXq1tZ2oqChz/Phxq83AgQPNoEGDrPmHHnrI9OzZ02v/UVFR5tlnnzXGGLN69Wrj5+dndu/eXen6+/bta/785z9X5S7b4uQ5boz3fT6pY8eOZsqUKcYYY44dO2bCwsLMvHnzrPWDBw+2juUvv/xiGjRoYLKzs722MWLECDN48GBjTOUeA1OmTDEdO3b02kZeXp6RZLZt22Yt+/HHH40k8+GHHxpjjOnXr58ZNmzY2RyGalWZc7kif//7303nzp2t+SlTppi6deuawsJCa9mZzs0RI0aYe+65x2vZRx99ZPz8/Kzjfer//V//+pfx9/c3+/fvt9p/9tlnRpLZtGmTVUeDBg1McXGx1eaRRx4xXbt2Pe19OXjwoJFkduzY8Zv3ubqcep5XRJJZunSpMcaYwsJCU6dOHbN27Vprfbdu3cyECROMMcZ89dVXxt/f33zzzTde27jppptMcnKyMcaYuXPnGkkmJyenXB2NGzc2hw8ftpbNnj3ben6uzOtIZZ7je/bsaR566KFKHh170aPiI02aNFHfvn2VlpamuXPnqm/fvuXeqeXm5urYsWPq0aOHtaxu3bq6+uqrtWvXLq+2HTp0sP5u1qyZJKmwsFDSiXdb48ePV9u2bdWoUSMFBgZq165dVo9KTk6O/P391bNnzwpr3bVrl7p16yaXy2Ut69Gjh0pKSvT111+fw1GoeTfccINycnKUk5OjTZs2qXfv3oqPj9dXX30lSdq+fbv27NmjoKAgBQYGKjAwUI0bN9Yvv/zi1c0cGxtrvcOUThzzk8e7MnJycnTJJZeoTZs2Fa4vLS3VE088obi4ODVu3FiBgYFavXq1Vy/YhaBOnTq688479eabb0o68a753XffVWJioqQT7/aPHDmim2++2fp/BAYGat68eeW6/X/rMXC27r//fi1atEidOnXSo48+quzs7HPani+d6VyWTrxr79GjhyIiIhQYGKi//OUv5c6hqKgoNWnSxJo/07m5fft2paWlef0/evfurbKyMuXl5ZVrv2vXLkVGRioyMtJa1q5dOzVq1MjreSw6OlpBQUHW/K8fU19++aUGDx6sSy+9VMHBwYqOjpak8+Ix0aRJE91yyy3WeZ6Xl6cNGzZY5/mOHTtUWlqqNm3aeB3XrKwsr/O8Xr16Xuf5SR07dvQa/9atWzeVlJQoPz+/Uq8jF9JzvGTzb/1caIYPH251l7744ovntK26detaf5882U52iY4fP14ZGRmaMWOGYmJiFBAQoD/84Q/WpYyAgIBz2vf5pGHDhoqJibHmX331VYWEhGjOnDn661//qpKSEnXu3Nl6QjnVqU/mpx5v6cQxr0oX9JmO+d///nc999xzmjlzpuLi4tSwYUM9/PDD591gRz8/P6/ubkleYySkE93iPXv2VGFhoTIyMhQQEKA+ffpIknVJaMWKFbr44ou9bvfrgYq/9Rg4XW2SvOr7dW0nX/j/+c9/KiMjQzfddJNGjRqlGTNmnP5O15AzncsnXwhTUlLUu3dvhYSEaNGiRXr66afLbedUZzo3S0pKdO+992rMmDHl1p3LhwHO9Jjq16+foqKiNGfOHDVv3lxlZWVq3779efOYSExM1JgxYzRr1iwtWLBAcXFxiouLk3TimPr7++vjjz/2egMkyboEL53435waJlAxgooPnRz34HK51Lt373LrW7VqpXr16mn9+vWKioqSdOKJdPPmzVX6PPv69es1dOhQ65p/SUmJ1+DQuLg4lZWVKSsrS7169Sp3+7Zt2+qdd96RMcZ6kKxfv15BQUG65JJLqnCPncflcsnPz8/6BNaVV16pxYsXKzw8XMHBwdW23w4dOujrr7/WF198UeE71/Xr1yshIUF//OMfJZ14wf3iiy/Url27aqupOjRp0kQFBQXWfHFxcbl33d27d1dkZKQWL16slStXauDAgdaL1qmDBk/X41cZ9erVU2lpabnapBMfIz05iP3UgbWntktKSlJSUpKuvfZaPfLII44IKr/263M5OztbUVFReuyxx6w2p/a2nM6Zzs0rr7xSO3fu9ApJv6Vt27bKz89Xfn6+1auyc+dOHTp0qNLn8/fff6/du3drzpw51piOdevWVeq2TpGQkKB77rlHq1at0oIFCzRkyBBr3RVXXKHS0lIVFhZa968qtm/frp9//tkKmRs3blRgYKAiIyMVFhZ2xteRC+05nks/PuTv769du3Zp586d5VK0dOKdzv33369HHnlEq1at0s6dOzVy5EgdOXJEI0aMqPR+WrdubQ2U2759u+6++26vdyrR0dFKSkrS8OHDtWzZMuXl5WnNmjV66623JEkPPPCA8vPz9eCDD+rzzz/Xu+++qylTpmjcuHHWu9Lzhcfj0YEDB3TgwAHt2rVLDz74oEpKStSvXz9JJ971hIWFKSEhQR999JF1LMaMGePTLtCePXvquuuu04ABA5SRkaG8vDytXLlSq1atknTif5aRkaHs7Gzt2rVL9957r9enJM4XN954o9544w199NFH2rFjh5KSkio81++++269/PLLysjIsLrDpRODQcePH6+xY8cqPT1dubm52rp1q2bNmqX09PRK1xEdHa28vDzl5OTou+++k8fjUUBAgH73u99p2rRp2rVrl7KysvSXv/zF63aTJ0/Wu+++qz179uizzz7T8uXL1bZt27M/ID50pnO5devW2r9/vxYtWqTc3Fw9//zzWrp06Rm3e6Zzc8KECcrOztbo0aOVk5OjL7/8Uu++++5pB9P26tVLcXFxSkxM1NatW7Vp0yYNGTJEPXv21FVXXVWp+3rRRRcpNDRUr7zyivbs2aN///vfGjduXCWPVPUpKiqyLr+dnPLz8yts27BhQ91xxx2aNGmSdu3apcGDB1vr2rRpo8TERA0ZMkRLlixRXl6eNm3apNTUVK1YseKMdRw9elQjRozQzp079c9//lNTpkzR6NGj5efnV6nXkQvpOV4Sg2nP1ZkGYJ06mNYYY37++Wfz4IMPmrCwMON2u02PHj2sAWjG/N9Awh9//NFatm3bNiPJ5OXlGWNODBq84YYbTEBAgImMjDQvvPBCuYFRP//8sxk7dqxp1qyZqVevnomJiTGvv/66tX7NmjWmS5cupl69eiYiIsJMmDDBHDt27FwPR41KSkoykqwpKCjIdOnSxbz99tte7QoKCsyQIUOsY37ppZeakSNHmqKiIms7v/4f/nrw7JkG0xpjzPfff2+GDRtmQkNDTf369U379u3N8uXLrXUJCQkmMDDQhIeHm7/85S9myJAhv3nuOMWf/vQnM2DAAGOMMUVFRWbQoEEmODjYREZGmrS0NK/BtCft3LnTSDJRUVFeA/qMMaasrMzMnDnTXHbZZaZu3bqmSZMmpnfv3iYrK8sYU7nHwC+//GIGDBhgGjVqZCSZuXPnWvvt1q2bCQgIMJ06dTL/+te/vAbTPvHEE6Zt27YmICDANG7c2CQkJJi9e/f6/JhVVWXP5UceecSEhoaawMBAM2jQIPPss8+akJAQa31Fg4yN+e1z0xhjNm3aZG6++WYTGBhoGjZsaDp06GCefPJJa/2vz/WvvvrK3H777aZhw4YmKCjIDBw40Bw4cOA363j22WdNVFSUNZ+RkWHatm1r3G636dChg1mzZo3XgNWa9uv/wclpxIgRxhhTYW3//Oc/jSRz3XXXldve0aNHzeTJk010dLSpW7euadasmenfv7/55JNPjDEnBtOe+r87tY6EhAQzefJk6389cuRI88svv1htzvQ6YsyZn+PPp8G0LmN+dcEZAE7Rp08fxcTE6IUXXrC7FOCCN3ToUB06dOiC+rr+c3Ue9gEBqAk//vijli9frjVr1lQ41gkAagKDaQFUaPjw4dq8ebP+/Oc/KyEhwe5yANRSXPoBAACOxaUfAADgWAQVAADgWAQVAADgWAQVAADgWAQVAADgWAQVAADgWAQVAOfM5XL95jR16lS7SwRwnuIL3wCcs1N/UXnx4sWaPHmydu/ebS079aftAaAq6FEBcM4iIiKsKSQkRC6Xy2vZokWL1LZtW9WvX1+XX365XnrpJa/bT5gwQW3atFGDBg106aWXatKkSTp27Ji1furUqerUqZNef/11tWjRQoGBgXrggQdUWlqqp556ShEREQoPD9eTTz5p3cYYo6lTp6pFixZyu91q3ry5xowZU2PHBIBv0KMCoFq9+eabmjx5sl544QVdccUV2rZtm0aOHKmGDRsqKSlJkhQUFKS0tDQ1b95cO3bs0MiRIxUUFKRHH33U2k5ubq5WrlypVatWKTc3V3/4wx+0d+9etWnTRllZWcrOztbw4cPVq1cvde3aVe+8846effZZLVq0SLGxsTpw4IC2b99u12EAcLZs/e1mABecX/98fatWrcyCBQu82jzxxBOmW7dup93G3//+d9O5c2drfsqUKaZBgwamuLjYWta7d28THR1tSktLrWWXXXaZSU1NNcYY8/TTT5s2bdqYo0ePnutdAmAjelQAVJvDhw8rNzdXI0aM0MiRI63lx48fV0hIiDW/ePFiPf/888rNzVVJSYmOHz+u4OBgr21FR0crKCjImm/atKn8/f3l5+fntaywsFCSNHDgQM2cOVOXXnqp+vTpo1tvvVX9+vVTnTo87QHnE8aoAKg2JSUlkqQ5c+YoJyfHmj799FNt3LhRkrRhwwYlJibq1ltv1fLly7Vt2zY99thjOnr0qNe26tat6zXvcrkqXFZWViZJioyM1O7du/XSSy8pICBADzzwgK677jqvsS8AnI+3FgCqTdOmTdW8eXPt3btXiYmJFbbJzs5WVFSUHnvsMWvZV1995ZP9BwQEqF+/furXr59GjRqlyy+/XDt27NCVV17pk+0DqH4EFQDVKiUlRWPGjFFISIj69Okjj8ejLVu26Mcff9S4cePUunVr7d+/X4sWLVKXLl20YsUKLV269Jz3m5aWptLSUnXt2lUNGjTQ/PnzFRAQoKioKB/cKwA1hUs/AKrV//zP/+jVV1/V3LlzFRcXp549eyotLU0tW7aUJN1+++0aO3asRo8erU6dOik7O1uTJk065/02atRIc+bMUY8ePdShQwd98MEHev/99xUaGnrO2wZQc1zGGGN3EQAAABWhRwUAADgWQQUAADgWQQUAADgWQQUAADgWQQUAADgWQQUAADgWQQUAADgWQQUAADgWQQUAADgWQQUAADgWQQUAADjW/wdpp6kxNvimDgAAAABJRU5ErkJggg==" style="max-width: 100%"></div></div><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [16]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total Fee</th>
+      <th>No. of Players</th>
+    </tr>
+    <tr>
+      <th>From Club</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Monaco</th>
+      <td>577.5</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>Benfica</th>
+      <td>390.0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>Juventus</th>
+      <td>374.5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>Barcelona</th>
+      <td>354.0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Liverpool</th>
+      <td>330.4</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div></div>

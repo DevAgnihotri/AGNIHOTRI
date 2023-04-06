@@ -1,0 +1,848 @@
+<div style="max-width: 960px;border: 1px solid&nbsp;#ccc;margin: 1em auto;padding: 1.5em 1.5em 1.5em 7em;background-color: white;box-shadow: 0 0 10px #ccc"><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [1]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#loading the required libraries</span>
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">from</span> matplotlib <span class="token keyword">import</span> pyplot <span class="token keyword">as</span> plt
+<span class="token comment" spellcheck="true">#import seaborn as sns</span></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [2]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#loading the serie A dataset</span>
+sra<span class="token operator">=</span>pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'table_serie_2022-23.csv'</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [3]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#having a glance at top 5 records of the dataset</span>
+sra<span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [3]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Team</th>
+      <th>Position</th>
+      <th>PL</th>
+      <th>W</th>
+      <th>D</th>
+      <th>L</th>
+      <th>GD</th>
+      <th>PTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Napoli</td>
+      <td>1</td>
+      <td>27</td>
+      <td>23</td>
+      <td>2</td>
+      <td>2</td>
+      <td>48</td>
+      <td>71</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Lazio</td>
+      <td>2</td>
+      <td>27</td>
+      <td>15</td>
+      <td>7</td>
+      <td>5</td>
+      <td>23</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Inter</td>
+      <td>3</td>
+      <td>27</td>
+      <td>16</td>
+      <td>2</td>
+      <td>9</td>
+      <td>16</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Milan</td>
+      <td>4</td>
+      <td>27</td>
+      <td>14</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Roma</td>
+      <td>5</td>
+      <td>27</td>
+      <td>14</td>
+      <td>5</td>
+      <td>8</td>
+      <td>9</td>
+      <td>47</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [4]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Looking at the number of rows(no. of teams) and columns in dataset</span>
+sra<span class="token punctuation">.</span>shape</code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [4]:</span><div style="min-height: 1em;"><pre style="margin: 0px; white-space: pre-wrap;">(20, 8)</pre></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [5]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Extracting the records where a team has positive GD.</span>
+sra<span class="token punctuation">[</span>sra<span class="token punctuation">[</span><span class="token string">'GD'</span><span class="token punctuation">]</span><span class="token operator">&gt;=</span><span class="token number">0</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [5]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Team</th>
+      <th>Position</th>
+      <th>PL</th>
+      <th>W</th>
+      <th>D</th>
+      <th>L</th>
+      <th>GD</th>
+      <th>PTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Napoli</td>
+      <td>1</td>
+      <td>27</td>
+      <td>23</td>
+      <td>2</td>
+      <td>2</td>
+      <td>48</td>
+      <td>71</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Lazio</td>
+      <td>2</td>
+      <td>27</td>
+      <td>15</td>
+      <td>7</td>
+      <td>5</td>
+      <td>23</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Inter</td>
+      <td>3</td>
+      <td>27</td>
+      <td>16</td>
+      <td>2</td>
+      <td>9</td>
+      <td>16</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Milan</td>
+      <td>4</td>
+      <td>27</td>
+      <td>14</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Roma</td>
+      <td>5</td>
+      <td>27</td>
+      <td>14</td>
+      <td>5</td>
+      <td>8</td>
+      <td>9</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Atalanta</td>
+      <td>6</td>
+      <td>27</td>
+      <td>13</td>
+      <td>6</td>
+      <td>8</td>
+      <td>13</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Juventus</td>
+      <td>7</td>
+      <td>27</td>
+      <td>17</td>
+      <td>5</td>
+      <td>5</td>
+      <td>23</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Udinese</td>
+      <td>8</td>
+      <td>27</td>
+      <td>9</td>
+      <td>11</td>
+      <td>7</td>
+      <td>6</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Fiorentina</td>
+      <td>9</td>
+      <td>27</td>
+      <td>10</td>
+      <td>7</td>
+      <td>10</td>
+      <td>1</td>
+      <td>37</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [6]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">plt<span class="token punctuation">.</span>bar<span class="token punctuation">(</span>list<span class="token punctuation">(</span>sra<span class="token punctuation">[</span><span class="token string">'PTS'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>list<span class="token punctuation">(</span>sra<span class="token punctuation">[</span><span class="token string">'PTS'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>color<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"deepskyblue"</span><span class="token punctuation">,</span><span class="token string">"cornflowerblue"</span><span class="token punctuation">,</span><span class="token string">"blue"</span><span class="token punctuation">,</span><span class="token string">"red"</span><span class="token punctuation">,</span><span class="token string">"maroon"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'NAP'</span><span class="token punctuation">,</span> <span class="token string">'LAZ'</span><span class="token punctuation">,</span> <span class="token string">'INT'</span><span class="token punctuation">,</span><span class="token string">'MIL'</span><span class="token punctuation">,</span><span class="token string">'ROM'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Teams'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'Prices'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><div style="min-height: 1em;"><img src="data:image/png;base64,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" style="max-width: 100%"></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [7]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Teams going to the champions league</span>
+sra<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [7]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Team</th>
+      <th>Position</th>
+      <th>PL</th>
+      <th>W</th>
+      <th>D</th>
+      <th>L</th>
+      <th>GD</th>
+      <th>PTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Napoli</td>
+      <td>1</td>
+      <td>27</td>
+      <td>23</td>
+      <td>2</td>
+      <td>2</td>
+      <td>48</td>
+      <td>71</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Lazio</td>
+      <td>2</td>
+      <td>27</td>
+      <td>15</td>
+      <td>7</td>
+      <td>5</td>
+      <td>23</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Inter</td>
+      <td>3</td>
+      <td>27</td>
+      <td>16</td>
+      <td>2</td>
+      <td>9</td>
+      <td>16</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Milan</td>
+      <td>4</td>
+      <td>27</td>
+      <td>14</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>48</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [8]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Team going to the europa league</span>
+sra<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [8]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Team</th>
+      <th>Position</th>
+      <th>PL</th>
+      <th>W</th>
+      <th>D</th>
+      <th>L</th>
+      <th>GD</th>
+      <th>PTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>Roma</td>
+      <td>5</td>
+      <td>27</td>
+      <td>14</td>
+      <td>5</td>
+      <td>8</td>
+      <td>9</td>
+      <td>47</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [9]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Team going to the Conference league</span>
+sra<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [9]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Team</th>
+      <th>Position</th>
+      <th>PL</th>
+      <th>W</th>
+      <th>D</th>
+      <th>L</th>
+      <th>GD</th>
+      <th>PTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5</th>
+      <td>Atalanta</td>
+      <td>6</td>
+      <td>27</td>
+      <td>13</td>
+      <td>6</td>
+      <td>8</td>
+      <td>13</td>
+      <td>45</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [10]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#Team getting to relegated to Serie B league</span>
+sra<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">:</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [10]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Team</th>
+      <th>Position</th>
+      <th>PL</th>
+      <th>W</th>
+      <th>D</th>
+      <th>L</th>
+      <th>GD</th>
+      <th>PTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>17</th>
+      <td>Hellas Verona</td>
+      <td>18</td>
+      <td>27</td>
+      <td>4</td>
+      <td>7</td>
+      <td>16</td>
+      <td>-19</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Sampdoria</td>
+      <td>19</td>
+      <td>27</td>
+      <td>3</td>
+      <td>6</td>
+      <td>18</td>
+      <td>-28</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Cremonese</td>
+      <td>20</td>
+      <td>27</td>
+      <td>1</td>
+      <td>10</td>
+      <td>16</td>
+      <td>-27</td>
+      <td>13</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [11]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"><span class="token comment" spellcheck="true">#loading the serie A events dataset</span>
+esra<span class="token operator">=</span>pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'events_serie_2022-23.csv'</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [12]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">esra<span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [12]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>event_id</th>
+      <th>match_id</th>
+      <th>team</th>
+      <th>event_team</th>
+      <th>event_time</th>
+      <th>event_type</th>
+      <th>action_player_1</th>
+      <th>action_player_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Juventus</td>
+      <td>away</td>
+      <td>23</td>
+      <td>Goal</td>
+      <td>Filip Kostić</td>
+      <td>Adrien Rabiot</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>Inter</td>
+      <td>home</td>
+      <td>30</td>
+      <td>Yellow card</td>
+      <td>Nicolo Barella</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>Juventus</td>
+      <td>away</td>
+      <td>31</td>
+      <td>Yellow card</td>
+      <td>Federico Gatti</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>Inter</td>
+      <td>home</td>
+      <td>63</td>
+      <td>Substitution</td>
+      <td>Danilo D'Ambrosio</td>
+      <td>Federico Dimarco</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>1</td>
+      <td>Inter</td>
+      <td>home</td>
+      <td>63</td>
+      <td>Substitution</td>
+      <td>Henrikh Mkhitaryan</td>
+      <td>Nicolo Barella</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [17]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">esra<span class="token punctuation">[</span>esra<span class="token punctuation">[</span><span class="token string">'event_type'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>str<span class="token punctuation">.</span>contains<span class="token punctuation">(</span><span class="token string">'Goal'</span><span class="token punctuation">)</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [17]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>event_id</th>
+      <th>match_id</th>
+      <th>team</th>
+      <th>event_team</th>
+      <th>event_time</th>
+      <th>event_type</th>
+      <th>action_player_1</th>
+      <th>action_player_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Juventus</td>
+      <td>away</td>
+      <td>23</td>
+      <td>Goal</td>
+      <td>Filip Kostić</td>
+      <td>Adrien Rabiot</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24</td>
+      <td>2</td>
+      <td>Lazio</td>
+      <td>home</td>
+      <td>65</td>
+      <td>Goal</td>
+      <td>Mattia Zaccagni</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>38</td>
+      <td>3</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>9</td>
+      <td>Goal</td>
+      <td>Victor Osimhen</td>
+      <td>Piotr Zieliński</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>41</td>
+      <td>3</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>51</td>
+      <td>Goal</td>
+      <td>Victor Osimhen</td>
+      <td>Mathías Olivera</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>47</td>
+      <td>3</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>68</td>
+      <td>Goal</td>
+      <td>Tanguy Ndombele</td>
+      <td>Khvicha Kvaratskhelia</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>4487</th>
+      <td>4488</td>
+      <td>269</td>
+      <td>Udinese</td>
+      <td>away</td>
+      <td>2</td>
+      <td>Goal</td>
+      <td>Rodrigo Becão</td>
+      <td>Gerard Deulofeu</td>
+    </tr>
+    <tr>
+      <th>4490</th>
+      <td>4491</td>
+      <td>269</td>
+      <td>Milan</td>
+      <td>home</td>
+      <td>15</td>
+      <td>Goal</td>
+      <td>Ante Rebic</td>
+      <td>Davide Calabria</td>
+    </tr>
+    <tr>
+      <th>4493</th>
+      <td>4494</td>
+      <td>269</td>
+      <td>Udinese</td>
+      <td>away</td>
+      <td>49</td>
+      <td>Goal</td>
+      <td>Adam Masina</td>
+      <td>Roberto Pereyra</td>
+    </tr>
+    <tr>
+      <th>4494</th>
+      <td>4495</td>
+      <td>269</td>
+      <td>Milan</td>
+      <td>home</td>
+      <td>46</td>
+      <td>Goal</td>
+      <td>Brahim Diaz</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4498</th>
+      <td>4499</td>
+      <td>269</td>
+      <td>Milan</td>
+      <td>home</td>
+      <td>68</td>
+      <td>Goal</td>
+      <td>Ante Rebic</td>
+      <td>Brahim Diaz</td>
+    </tr>
+  </tbody>
+</table>
+<p>600 rows × 8 columns</p>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [37]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python">esra<span class="token punctuation">[</span><span class="token punctuation">(</span>esra<span class="token punctuation">[</span><span class="token string">'team'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'Napoli'</span><span class="token punctuation">)</span><span class="token punctuation">]</span></code></pre><div style="margin: 1em 0px 0.5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 0 !important;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #de4815">Out [37]:</span><div style="min-height: 1em;"><div><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>event_id</th>
+      <th>match_id</th>
+      <th>team</th>
+      <th>event_team</th>
+      <th>event_time</th>
+      <th>event_type</th>
+      <th>action_player_1</th>
+      <th>action_player_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>37</th>
+      <td>38</td>
+      <td>3</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>9</td>
+      <td>Goal</td>
+      <td>Victor Osimhen</td>
+      <td>Piotr Zieliński</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>40</td>
+      <td>3</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>35</td>
+      <td>Penalty</td>
+      <td>Khvicha Kvaratskhelia</td>
+      <td>Penalty</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>41</td>
+      <td>3</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>51</td>
+      <td>Goal</td>
+      <td>Victor Osimhen</td>
+      <td>Mathías Olivera</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>45</td>
+      <td>3</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>65</td>
+      <td>Substitution</td>
+      <td>Eljif Elmas</td>
+      <td>Hirving Lozano</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>46</td>
+      <td>3</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>65</td>
+      <td>Substitution</td>
+      <td>Tanguy Ndombele</td>
+      <td>Piotr Zieliński</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>4360</th>
+      <td>4361</td>
+      <td>261</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>79</td>
+      <td>Goal</td>
+      <td>Matteo Politano</td>
+      <td>Victor Osimhen</td>
+    </tr>
+    <tr>
+      <th>4361</th>
+      <td>4362</td>
+      <td>261</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>83</td>
+      <td>Substitution</td>
+      <td>Mathías Olivera</td>
+      <td>Mario Rui</td>
+    </tr>
+    <tr>
+      <th>4362</th>
+      <td>4363</td>
+      <td>261</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>83</td>
+      <td>Substitution</td>
+      <td>Adam Ounas</td>
+      <td>Victor Osimhen</td>
+    </tr>
+    <tr>
+      <th>4363</th>
+      <td>4364</td>
+      <td>261</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>84</td>
+      <td>Disallowed goal</td>
+      <td>Disallowed goal</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4364</th>
+      <td>4365</td>
+      <td>261</td>
+      <td>Napoli</td>
+      <td>away</td>
+      <td>93</td>
+      <td>Yellow card</td>
+      <td>Kim Min-jae</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>234 rows × 8 columns</p>
+</div></div></div></div></div></div></div><div style="padding-bottom: .5em;"><div style="position: relative;"><span style="display: block;position: absolute;top: 5px;left: -7.5em;width: 7em;font-family: monospace;text-align: right;color: #303fba">In [ ]:</span><pre style="background: #f7f7f7;border: 1px solid #cfcfcf;padding: .4em;margin-bottom: 0;margin-top: 0;border-radius: 2px;min-height: .85em" class=" language-python"><code class=" language-python"></code></pre><div style="margin: 1em 0px 0.5em;"></div></div></div></div>
